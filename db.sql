@@ -1,0 +1,4 @@
+CREATE TABLE pant (
+  id SERIAL PRIMARY KEY,
+  value DECIMAL(4, 2)
+);
