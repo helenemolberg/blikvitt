@@ -2,8 +2,10 @@ import psycopg2
 
 from flask import Flask, render_template, request
 
+import config
+
 app = Flask(__name__)
-database_connection = psycopg2.connect('dbname=pantsql user=pantman password=pat')
+database_connection = psycopg2.connect(config.DATABASE_URI)
 
 
 @app.route('/')
