@@ -4,16 +4,16 @@ from flask import Flask, render_template, request
 
 import config
 
-app = Flask(__name__)
+application = Flask(__name__)
 database_connection = psycopg2.connect(config.DATABASE_URI)
 
 
-@app.route('/')
+@application.route('/')
 def hello_world():
     return render_template('frontpage.html')
 
 
-@app.route('/add_pant', methods=['GET', 'POST'])
+@application.route('/add_pant', methods=['GET', 'POST'])
 def add_pant():
     with database_connection.cursor() as cursor:
         if request.method == 'POST':
@@ -30,4 +30,4 @@ def add_pant():
 
 
 if __name__ == '__main__':
-    app.run()
+    application.run()
