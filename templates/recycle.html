@@ -9,27 +9,21 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
         integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
         crossorigin=""/>
-    <style>
-        #map {
-            margin: 0 auto;
-            width: 800px;
-            height: 500px;
-        }
+    <link rel="stylesheet" type="text/css" href="../static/underPages.css">
 
-    </style>
 
 
 </head>
-    <body>
+    <body style="background-color: aliceblue">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
-        <nav class="navbar navbar-light" style="background-color: #CDE4D1;">
+        <nav class="navbar navbar-light" style="background-color: #CDE4D1; justify-content: left" >
             <a class="navbar-brand" href="#">
-                <img src="../images/miljosiden_image.gif" width="30" height="30" alt="">
+                <img src="/static/images/miljosiden_image.gif" width="30" height="30" alt="">
                 Miljøsiden
             </a>
-            <ul class="nav justify-content-start" >
+            <ul class="nav">
                 <li class="nav-item" >
                     <a class="nav-link active" href="#">Pant</a>
                 </li>
@@ -41,22 +35,42 @@
                 </li>
             </ul>
         </nav>
-        <br/>
-        <h1 style="align: center"> Tittel </h1>
-        <br/>
 
-        <div id="map"></div>
-        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
-        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
-        crossorigin="">
-        </script>
-        <script>
-           var map = L.map('map').setView([45.46, -122.739], 4);
-           L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                maxZoom: 18,
-                id: 'mapbox.streets',
-                accessToken: 'pk.eyJ1Ijoibm9yYWJyYXNrIiwiYSI6ImNqcmFqZmpiZTAweGw0M3VwZWNrbDBmYTMifQ.AOxh5UWfWvR5c_my3yPTBQ'
-            }).addTo(map);
-        </script>
+        <br/>
+        <div id="space_maker"><h1 > Finn din nærmeste miljøstasjon  </h1>
+            <br/>
+             <div style="text-align: center;">
+                 <div>
+                     <h5> Hva ønsker du å resirkulere? </h5>
+                     <form action="/action_page.php" >
+                        <input type="checkbox" name="recproduct" value="plastic"> Plast<br>
+                        <input type="checkbox" name="recproduct" value="metal" checked> Metall og glass<br>
+                        <input type="checkbox" name="recproduct" value="paper" checked> Papp og papir<br>
+                        <input type="checkbox" name="recproduct" value="electric" checked> Elektrisk avfall <br>
+                     </form>
+                     <a href="https://no.wikipedia.org/wiki/Resirkulering">
+                         <button type="submit" id = "big_button"> Søk </button>
+                     </a>
+                 </div>
+
+             </div>
+
+            <br/>
+
+            <div id="map"></div>
+            <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+            crossorigin="">
+            </script>
+            <script>
+               var map = L.map('map').setView([63.430827, 10.410906], 13);
+               L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    maxZoom: 18,
+                    id: 'mapbox.streets',
+                    accessToken: 'pk.eyJ1Ijoibm9yYWJyYXNrIiwiYSI6ImNqcmFqZmpiZTAweGw0M3VwZWNrbDBmYTMifQ.AOxh5UWfWvR5c_my3yPTBQ'
+                }).addTo(map);
+            </script>
+        </div>
+
 </html>

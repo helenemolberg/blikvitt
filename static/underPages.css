@@ -1,0 +1,35 @@
+#big_button{
+    font-size: 18px;
+    font-weight: bold;
+    background: #257956;
+    color: rgb(255, 255, 255);
+    border: 0;
+    text-decoration: none;
+    display: inline-block;
+    width: 310px;
+    max-width: 100%;
+    height: 40px;
+    outline: none;
+    text-align: center;
+    padding-left: 15px;
+}
+
+.h1 {
+    align-items: center;
+
+}
+
+#space_maker{
+    padding: 30px;
+    text-align: center;
+}
+
+#map {
+    margin: 0 auto;
+    width: 600px;
+    height: 500px;
+    border: 20px;
+    border-style: solid;
+    border-color: lightseagreen;
+}
+
