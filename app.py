@@ -5,7 +5,7 @@ from flask import Flask, render_template, request
 import config
 
 application = Flask(__name__)
-database_connection = psycopg2.connect(config.DATABASE_URI)
+'''database_connection = psycopg2.connect(config.DATABASE_URI)'''
 
 
 @application.route('/')
@@ -13,7 +13,7 @@ def hello_world():
     return render_template('frontpage.html')
 
 
-@application.route('/add_pant', methods=['GET', 'POST'])
+'''@application.route('/add_pant', methods=['GET', 'POST'])
 def add_pant():
     with database_connection.cursor() as cursor:
         if request.method == 'POST':
@@ -28,6 +28,6 @@ def add_pant():
         pant = cursor.fetchall()
     return render_template('add_pant.html', pant=pant)
 
-
+'''
 if __name__ == '__main__':
     application.run()
