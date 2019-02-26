@@ -1,4 +1,8 @@
 .nav.nav-pills.nav-item li a{
-    color: #444444;
+    color: #c5d5c5;
+}
+
+#nav_item{
+    color: white;
 }
 
