@@ -41,16 +41,12 @@
             <br/>
              <div style="text-align: center;">
                  <div >
-                     <h5> Hva ønsker du å resirkulere? </h5>
+                     <h5> Hva leter du etter? </h5>
                      <form action="/action_page.php" >
-                        <input type="checkbox" name="recproduct" value="plastic"> Plast<br>
-                        <input type="checkbox" name="recproduct" value="metal" checked> Metall og glass<br>
-                        <input type="checkbox" name="recproduct" value="paper" checked> Papp og papir<br>
-                        <input type="checkbox" name="recproduct" value="electric" checked> Elektrisk avfall <br>
+                        <input type="checkbox" name="recproduct" value="plastic"> Nærmeste innsamlingspunkt<br>
+                        <input type="checkbox" name="recproduct" value="metal" checked> Nærmeste Fretex-utsalg<br>
                      </form>
-                     <a href="https://no.wikipedia.org/wiki/Resirkulering">
-                         <button type="submit" id = "big_button"> Søk </button>
-                     </a>
+
                  </div>
              </div>
 
@@ -73,11 +69,28 @@
                filtered = [(63.42983445294848, 10.368214199539029), (63.439024006030465, 10.42835219928823)]
 
                marker = new L.marker([63.42983445294848, 10.368214199539029]).addTo(map);
+               fjordgata = new L.marker([63.434902, 10.39895]).addTo(map);
+               nardo = new L.marker([63.409408, 10.4188753]).addTo(map);
+               rosenborg = new L.marker([63.4338341, 10.4160679]).addTo(map);
+
+               marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+               fjordgata.bindPopup("<b> Fretex Fjordgata</b> Fjordgata 40, 7010 Trondheim <b>").openPopup();
+               nardo.bindPopup("<b> Fretex Nardo</b> Nardovegen 10, 7032 Trondheim<b>").openPopup();
+               rosenborg.bindPopup("<b> Fretex Bruktbutikk</b> Rosenborg gate 9B, 7043 Trondheim <b>").openPopup();
+
+               for (var i = 0; i < filtered.length; i++) {
+                    marker = new L.marker([filtered[i][1],filtered[i][2]]).addTo(map);
+                }
 
                for (var i = 0; i < filtered.length; i++) {
                     marker = new L.marker([filtered[i][1],filtered[i][2]]).addTo(map);
                 }
             </script>
+            <br>
+             <a href="https://www.fretex.no/">
+                         <button type="submit" id = "big_button"> Les mer om Fretex </button>
+                     </a>
         </div>
+    </body>
 
-</html>
+<html>
