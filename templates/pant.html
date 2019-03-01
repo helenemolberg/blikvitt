@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pant</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>A Leaflet map!</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin=""/>
+    <link rel="stylesheet" type="text/css" href="../static/underPages.css">
+    <link rel="stylesheet" href="/w3css/4/w3.css">
+
+
+</head>
+    <body style="background-color: #c5d5c5">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+        <nav class="navbar navbar-light" style="background-color: #CDE4D1; justify-content: left" >
+            <a class="navbar-brand" href="#">
+                <img src="/static/images/miljosiden_image.gif" width="30" height="30" alt="">
+                Miljøsiden
+            </a>
+            <ul class="nav">
+                <li class="nav-item" >
+                    <a class="nav-link active" href="#">Pant</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Fretexbokser</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Miljøstasjoner</a>
+                </li>
+            </ul>
+        </nav>
+
+        <br/>
+        <div id="space_maker"><h1> Pant  </h1>
+            <br/>
+             <div style="text-align: center;">
+                 <div >
+                     <h5> Hva ønsker du å resirkulere? </h5>
+                     <form action="/action_page.php" >
+                        <input type="checkbox" name="recproduct" value="plastic"> Plast<br>
+                        <input type="checkbox" name="recproduct" value="metal" checked> Metall og glass<br>
+                        <input type="checkbox" name="recproduct" value="paper" checked> Papp og papir<br>
+                        <input type="checkbox" name="recproduct" value="electric" checked> Elektrisk avfall <br>
+                     </form>
+                     <a href="https://no.wikipedia.org/wiki/Resirkulering">
+                         <button type="submit" id = "big_button"> Søk </button>
+                     </a>
+                 </div>
+             </div>
+
+            <br/>
+
+            <div id="map"></div>
+            <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+            crossorigin="">
+            </script>
+            <script>
+               var map = L.map('map').setView([63.430827, 10.410906], 13);
+               L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    maxZoom: 18,
+                    id: 'mapbox.streets',
+                    accessToken: 'pk.eyJ1Ijoibm9yYWJyYXNrIiwiYSI6ImNqcmFqZmpiZTAweGw0M3VwZWNrbDBmYTMifQ.AOxh5UWfWvR5c_my3yPTBQ'
+                }).addTo(map);
+
+               filtered = [(63.42983445294848, 10.368214199539029), (63.439024006030465, 10.42835219928823)]
+
+               marker = new L.marker([63.42983445294848, 10.368214199539029]).addTo(map);
+
+               for (var i = 0; i < filtered.length; i++) {
+                    marker = new L.marker([filtered[i][1],filtered[i][2]]).addTo(map);
+                }
+            </script>
+        </div>
+
+</html>
