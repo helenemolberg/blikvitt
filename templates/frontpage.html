@@ -1,31 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Miljøsiden</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+  font: 400 15px/1.8 "Lato", sans-serif;
+  color: #777;
+}
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  position: relative;
+  opacity: 0.65;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.bgimg-1 {
+  background-image: url("/static/images/background.jpg");
+  height: 50%;
+}
+.caption {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+.caption span.border {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+}
+h3 {
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font: 20px "Lato", sans-serif;
+  color: #111;
+}
+img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 300px;
+    height: 214px;
+}
+img:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+</style>
 </head>
-<body style="background-color: olivedrab">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<body>
 
-<nav class="navbar navbar-light" style="background-color: #e3e0cc; color: black; justify-content: left" >
-    <a class="navbar-brand" href="#">
-        <img src="/static/images/miljosiden_image.gif" width="30" height="30" alt="">
-        Miljøsiden
-    </a>
-    <ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link active" href="#" style="color:black">Pant</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Fretexbokser</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Miljøstasjoner</a>
-        </li>
-    </ul>
-</nav>
+<div class="bgimg-1">
+  <div class="caption">
+    <span class="border">VELKOMMEN TIL</span><br>
+    <span class="border">MILJØSIDEN</span>
+  </div>
+</div>
+
+<div class="pant" style="position: absolute; left: 100px; top: 400px">
+    <img src="/static/images/Pantbilde-300.jpg">
+</div>
+
+<div class="fretex" style="position: absolute; left: 550px; top: 400px">
+    <img src="/static/images/fretex.jpg">
+</div>
+
+<div class="gjennvinning" style="position: absolute; left: 1000px; top: 400px">
+    <img src="/static/images/gjenn_1.jpg">
+</div>
+
 </body>
 </html>
