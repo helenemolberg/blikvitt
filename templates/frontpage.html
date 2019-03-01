@@ -67,12 +67,20 @@ img:hover {
 </div>
 
 <div class="fretex" style="position: absolute; left: 550px; top: 400px">
-    <img src="/static/images/fretex.jpg">
+    <a href="fretex.html">
+        <img src="/static/images/fretex.jpg">
+    </a>
 </div>
 
 <div class="gjennvinning" style="position: absolute; left: 1000px; top: 400px">
-    <img src="/static/images/gjenn_1.jpg">
+    <img src="/static/images/gjenn_1.jpg" onclick="changePage_fretex()">
 </div>
+
+<script>
+    function changePage_fretex() {
+        window.location.href = 'fretex.html'
+    }
+</script>
 
 </body>
 </html>
