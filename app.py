@@ -28,6 +28,11 @@ def recycle():
     return render_template('recycle.html')
 
 
+@application.route('/login')
+def login():
+    return render_template('userLogin.html')
+
+
 '''@application.route('/add_pant', methods=['GET', 'POST'])
 def add_pant():
     with database_connection.cursor() as cursor:

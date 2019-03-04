@@ -19,20 +19,24 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
         <nav class="navbar navbar-light" style="background-color: #CDE4D1; justify-content: left" >
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="http://127.0.0.1:5000/">
                 <img src="/static/images/miljosiden_image.gif" width="30" height="30" alt="">
                 Miljøsiden
             </a>
             <ul class="nav">
                 <li class="nav-item" >
-                    <a class="nav-link active" href="#">Pant</a>
+                    <a class="nav-link active" href="http://127.0.0.1:5000/fretex">Fretexbosker</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Fretexbokser</a>
+                    <a class="nav-link" href="http://127.0.0.1:5000/pant">Panteautomater</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Miljøstasjoner</a>
+                    <a class="nav-link" href="http://127.0.0.1:5000/recycle">Miljøstasjoner</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:5000/login">Logg inn</a>
+                </li>
+
             </ul>
         </nav>
 
@@ -100,11 +104,9 @@
                                 'Ark Christiesgate, Mot Prinsensgt', 'Bakkegata/Kirkegata, v/P-plass', 'Dokkgata/Verftsgata', 'Dronningens gate 1B', 'Dyre Halses gate 8', 'Elgeseter gate 38', 'Elvegata 12-14, v/P-plass', 'Erling Skakkes g 58', 'Erling Skakkes gate 5', 'Festningsgata/Småbergan', 'Fjordgata 10, v/P-plass', 'Fjordgata 40/42, v/Fretex-butikk', 'Fjordgata 82, v/Ravnkloa', 'Frostav 2, Snuplass v/Tautragata', 'Frostaveien 13', 'Gamle Kongevei 4A', 'Gregusgata/ Innherredsveien 58', 'Gyldenløves gate 23', 'Hanskemakerbakken, v/ Koefoedgeilan', 'Hospitalsløkkan 22, v/E-verk trafo', 'Ilsvikøra 1', 'Kirkegata, v/P-plass Gyldenløves gate', 'Klostergata 34-36, v/P-plass', 'Klostergata 76A', 'Klæbuveien 36-38', 'Klæbuveien/Abelsgate', 'Koefoedgeilan 10', 'Korsgata 15, v/Singsakerbakken', 'Ladeveien, v/Lilleby skole', 'Leutenhaven, v/P-plass', 'Lilleby, Ladebekken 9', 'Lilleby, Stjørdalsveien 7', 'Magnus den godes gt 10', 'Mellomila/Hans Nissens gate', 'Mellomila/Østre Ila', 'Nedre Bakklandet/Nygata', 'Nedre Møllenberg /Gamle Kongvei 10', 'Nedre Møllenberg gate 1A, v/Lekeplass', 'Nedre Møllenberg gate 31A v/P-plass', 'Osloveien 12, v/Joker', 'Sandgata 13/15', 'Sandgata, v/P-plass Batteriveita', 'Skansegata/Brubakken, v/P-plass', 'St Olavsgate/Dronningensgate', 'Strandveien 30-32, v/trafo', 'Thaulowkaia, v/Solsiden kjøpesenter', 'Tormodsgate 3', 'Udbyes gate 3 v/E. Tamberskjelves g', 'Vollabakken, v/Teglbrennerveien', 'Wesselsgate, mot Innherredsveien', 'Øvre Bakklandet 28', 'Øvre Bakklandet/Lillegårdsbakken', 'Øvre Møllenberg gate 57', 'Øvre Møllenberg gate 65', 'Christian Monsens gt/Ludvig Daaes gt', 'City Syd, v/bensinstasjon', 'Flatåsen, Øvre Flatåsvei 4 D, v/Rema', 'Fossegrenda 44, v/Skippysenteret', 'Grilstad Marina, Grillstadfjæra 72', 'Grilstad Marina, Skonnertvegen 8-10', 'Grilstad Marina, Strindfjordvegen 10', 'Heimdal sentrum, Bak fiskematbutikk', 'Ila, Hanskemakerbakken', 'Kattem, Uståsen 2, v/Coop Prix', 'Klæbu, Rydlandvegen 2, v/YX', 'Klæbu, v/P-plass Coop Extra', 'Kyvannsvegen 16', 'Lade Allé 65', 'Lade, Julianus Holms veg 26, mid.tidig', 'Lade, Julianus Holms Veg 66', 'Lade, v/City Lade, flaskeautomat', 'Liljendal, Falkenborgvegen 24', 'Lillebergveien 8, v/Bunnpris Tyholt', 'Lilleby, Ladeveien 17', 'Lund Østre, Andersbakkan 96', 'Nedre Humlehaugen, Horgvegen 2', 'Ranheim, Horgsletta 30', 'Ranheimsfjæra 87', 'Ranheimsvegen 177', 'Risvollan, Ingeborg Aas v1, v/høyblokk', 'Romolslia, v/Bunnpris', 'Rosenborg skole, v/omsorgsenter', 'Saupstadsenteret, v/P-plass', 'Sjetnemarka, Parallellen 23, v/Coop', 'Stavset, v/Rema 1000', 'Strinda Hageby, Øvre Granåslia 1', 'Tempeveien 25, v/TRV', 'Tiller Øst, Brauta 89, v/Tiller Hageby', 'Tiller Øst, Harald Torps Veg 23', 'Tiller Øst, Movollen 41', 'Tiller, Hårstadhaugen', 'Ugla, Anders Wigens v 2, v/Coop Extra', 'Valentinlyst, v/Coop Mega']
 
 
-
-
-
                //var marker1 = new L.marker([63.42983445294848, 10.368214199539029]).addTo(map);
                //var marker2 = new L.marker(filtered[1]).addTo(map);
+
 
 
                for ( var i = 0; i < papir.length; i++) {
