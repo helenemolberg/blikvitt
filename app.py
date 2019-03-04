@@ -13,6 +13,21 @@ def hello_world():
     return render_template('frontpage.html')
 
 
+@application.route('/fretex')
+def fretex():
+    return render_template('fretex.html')
+
+
+@application.route('/pant')
+def pant():
+    return render_template('pant.html')
+
+
+@application.route('/recycle')
+def recycle():
+    return render_template('recycle.html')
+
+
 '''@application.route('/add_pant', methods=['GET', 'POST'])
 def add_pant():
     with database_connection.cursor() as cursor:
