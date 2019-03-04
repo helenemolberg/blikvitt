@@ -33,6 +33,11 @@ def login():
     return render_template('userLogin.html')
 
 
+@application.route('/registeruser')
+def registeruser():
+    return render_template('registerUser.html')
+
+
 '''@application.route('/add_pant', methods=['GET', 'POST'])
 def add_pant():
     with database_connection.cursor() as cursor:
