@@ -81,5 +81,6 @@ def add_pant():
 '''
 
 if __name__ == '__main__':
-    db.create_all()
     manager.run()
+
+'''to create a new table use db.create_all()'''

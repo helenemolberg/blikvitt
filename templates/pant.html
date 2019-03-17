@@ -3,42 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <title>Pant</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <title>A Leaflet map!</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
         integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
         crossorigin=""/>
     <link rel="stylesheet" type="text/css" href="../static/underPages.css">
     <link rel="stylesheet" href="/w3css/4/w3.css">
-
+<style>
+    body, html {
+  height: 100%;
+  margin: 0;
+  font: 400 15px/1.8 "Lato", sans-serif;
+  color: #777;
+}
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  position: relative;
+  opacity: 0.65;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.bgimg-1 {
+  background-image: url("/static/images/plastic_in_ocean.jpg");
+  height: 100%;
+}
+.caption {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+.caption span.border {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+}
+    .nav-link{
+    font-size: 18px;
+    font-family: "Bell MT";
+}
+</style>
 
 </head>
-    <body style="background-color: #c5d5c5">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
-        <nav class="navbar navbar-light" style="background-color: #CDE4D1; justify-content: left" >
-            <a class="navbar-brand" href="/">
-                <img src="/static/images/miljosiden_image.gif" width="30" height="30" alt="">
-                Miljøsiden
-            </a>
-            <ul class="nav">
-                <li class="nav-item" >
-                    <a class="nav-link active" href="/fretex">Fretexbosker</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/pant">Panteautomater</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/recycle">Miljøstasjoner</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Logg inn</a>
-                </li>
-
-            </ul>
-        </nav>
+<body>
+<div class="navBar">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light justify-content-center">
+        <a class="navbar-brand" href="/">MS</a>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Om oss</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pant">Pant</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/fretex">Fretex</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/recycle">Miljøstasjoner</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Logg inn</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/registeruser">Registrer</a>
+            </li>
+        </ul>
+  
+        <!--<span class="navbar-text white-text">
+          Navbar text with an inline element
+        </span>-->
+</nav>
+</div>
+<div class="bgimg-1">
+  <div class="caption">
+    <span class="border">HUSK Å PANT</span><br>
+    <span class="border">Les mer</span>
+  </div>
+</div>
 
         <br/>
         <div id="space_maker"><h1> Pant  </h1>
@@ -83,5 +137,5 @@
                 }
             </script>
         </div>
-
+</body>
 </html>

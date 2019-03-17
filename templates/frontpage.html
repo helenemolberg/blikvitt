@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <style>
 body, html {
   height: 100%;
@@ -18,7 +23,7 @@ body, html {
 }
 .bgimg-1 {
   background-image: url("/static/images/background.jpg");
-  height: 50%;
+  height: 100%;
 }
 .caption {
   position: absolute;
@@ -51,10 +56,70 @@ img {
 img:hover {
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
+
+.container{
+    margin-top: 100px;
+}
+
+.nav-link{
+    font-size: 18px;
+    font-family: "Bell MT";
+}
+
+
+.col-3{
+    width: 100%;
+}
+
+.feature-item{
+    text-align: center;
+}
+
+.col-2{
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.footer{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
 </style>
 </head>
 <body>
+<div class="navBar">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light justify-content-center">
+        <a class="navbar-brand" href="/">MS</a>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Om oss</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pant">Pant</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/fretex">Fretex</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/recycle">Miljøstasjoner</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Logg inn</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/registeruser">Registrer</a>
+            </li>
+        </ul>
 
+        <!--<span class="navbar-text white-text">
+          Navbar text with an inline element
+        </span>-->
+</nav>
+</div>
 <div class="bgimg-1">
   <div class="caption">
     <span class="border">VELKOMMEN TIL</span><br>
@@ -62,24 +127,51 @@ img:hover {
   </div>
 </div>
 
-<div class="pant" style="position: absolute; left: 100px; top: 400px">
-    <a href="pant">
-        <img src="/static/images/Pantbilde-300.jpg">
-    </a>
-</div>
-
-<div class="fretex" style="position: absolute; left: 550px; top: 400px">
-    <a href="fretex">
-        <img src="/static/images/fretex.jpg">
-    </a>
-</div>
-
-<div class="gjennvinning" style="position: absolute; left: 1000px; top: 400px">
-    <a href="recycle">
-        <img src="/static/images/gjenn_1.jpg">
-    </a>
-</div>
-
+<section class="different-stations" id="stations">
+    <div class="container">
+        <div class="col-3">
+            <div class="feature-item">
+                <div class="pant" style="position: absolute;" >
+                    <a href="pant">
+                        <img src="/static/images/Pantbilde-300.jpg">
+                    </a>
+                    <h4>Finn panteautomat</h4>
+                    <p>Trykk på bilde for å finne ut hvor panteautomatene i Trondheim er plassert.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="feature-item">
+                <div class="fretex" style="position: absolute; left: 400px;">
+                    <a href="fretex">
+                        <img src="/static/images/fretex.jpg">
+                    </a>
+                    <h4>Finn fretexboks</h4>
+                    <p>Trykk på bilde for å finne ut hvor fretexboksene i Trondheim er plassert.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="feature-item">
+                <div class="gjennvinning" style="position: absolute; left: 800px;">
+                    <a href="recycle">
+                         <img src="/static/images/gjenn_1.jpg">
+                    </a>
+                    <h4>Finn miljøstasjon</h4>
+                    <p>Trykk på bilde for å finne ut hvor de ulike miljøstasjonene i Trondheim er plassert.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+    <div class="container">
+        <div class="col-2">
+            <h4>Lenker</h4>
+            <!--Kan liste opp lenker til de ulike sidene hvor man kan finne mer informasjon-->
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>
