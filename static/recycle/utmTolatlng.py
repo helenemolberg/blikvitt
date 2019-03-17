@@ -57,7 +57,6 @@ def converter(eastingList, northingList):
     latLongList = []
     for i in range(len(eastingList)):
         latLongList.append(utmToLatLng(32, eastingList[i], northingList[i], True))
-    #print(latLongList)
     return latLongList
 
 def main():
@@ -397,7 +396,6 @@ def main():
                576787.1,
                572208,
                570972.3]
-
     northing = [7034211,
                 7034211,
                 7035300.3,
