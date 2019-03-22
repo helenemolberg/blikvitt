@@ -1,137 +1,183 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
+body{
+    background-image: url("/static/images/trondheim_vann_65.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'HelveticaNeue', 'Arial', sans-serif;
 
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
 }
 
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
+a{color:#58bff6;text-decoration: none;}
+a:hover{color:#aaa; }
+.pull-right{float: right;}
+.pull-left{float: left;}
+.clear-fix{clear:both;}
+div.logo{text-align: center; margin: 20px 20px 30px 20px; fill: #566375;}
+.head{padding:40px 0px; 10px 0}
+.logo-active{fill: #44aacc !important;}
+#formWrapper{
+	background: rgba(0,0,0,.2);
+	width:100%;
+	height:100%;
+	position: absolute;
+	top:0;
+	left:0;
+	transition:all .3s ease;}
+.darken-bg{background: rgba(0,0,0,.5) !important; transition:all .3s ease;}
 
-button:hover {
-  opacity: 0.8;
+div#form{
+	position: absolute;
+	width:360px;
+	height:320px;
+	height:auto;
+	background-color: #fff;
+	margin:auto;
+	border-radius: 5px;
+	padding:20px;
+	left:50%;
+	top:50%;
+	margin-left:-180px;
+	margin-top:-200px;
 }
- .registerbtn{
-    width: auto;
-    padding: 10px 18px;
-  }
+div.form-item{position: relative; display: block; margin-bottom: 40px;}
+ input{transition: all .2s ease;}
+ input.form-style{
+	color:#8a8a8a;
+	display: block;
+	width: 90%;
+	height: 44px;
+	padding: 5px 5%;
+	border:1px solid #ccc;
+	-moz-border-radius: 27px;
+	-webkit-border-radius: 27px;
+	border-radius: 27px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #fff;
+	font-family:'HelveticaNeue','Arial', sans-serif;
+	font-size: 105%;
+	letter-spacing: .8px;
+}
+div.form-item .form-style:focus{outline: none; border:1px solid #58bff6; color:#58bff6; }
+div.form-item p.formLabel {
+	position: absolute;
+	left:26px;
+	top:10px;
+	transition:all .4s ease;
+	color:#bbb;}
+.formTop{top:-22px !important; left:26px; background-color: #fff; padding:0 5px; font-size: 14px; color:#58bff6 !important;}
+.formStatus{color:#8a8a8a !important;}
+input[type="submit"].login{
+	float:right;
+	width: 112px;
+	height: 37px;
+	-moz-border-radius: 19px;
+	-webkit-border-radius: 19px;
+	border-radius: 19px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #55b1df;
+	border:1px solid #55b1df;
+	border:none;
+	color: #fff;
+	font-weight: bold;
+}
+input[type="submit"].login:hover{background-color: #fff; border:1px solid #55b1df; color:#55b1df; cursor:pointer;}
+input[type="submit"].login:focus{outline: none;}
 
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
-
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-}
-
-img.avatar {
-  width: 30%;
-  border-radius: 50%;
-}
-
-.container {
-  padding: 16px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
-}
 </style>
 </head>
+<script type="text/javascript">
+    $(document).ready(function(){
+	var formInputs = $('input[type="email"],input[type="password"]');
+	formInputs.focus(function() {
+       $(this).parent().children('p.formLabel').addClass('formTop');
+       $('div#formWrapper').addClass('darken-bg');
+       $('div.logo').addClass('logo-active');
+	});
+	formInputs.focusout(function() {
+		if ($.trim($(this).val()).length == 0){
+		$(this).parent().children('p.formLabel').removeClass('formTop');
+		}
+		$('div#formWrapper').removeClass('darken-bg');
+		$('div.logo').removeClass('logo-active');
+	});
+	$('p.formLabel').click(function(){
+		 $(this).parent().children('.form-style').focus();
+	});
+});
+</script>
 <body>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
-    <nav class="navbar navbar-light" style="background-color: #CDE4D1; justify-content: left" >
-          <a class="navbar-brand" href="/">
-              <img src="/static/images/miljosiden_image.gif" width="30" height="30" alt="">
-              Miljøsiden
-          </a>
-          <ul class="nav">
-              <li class="nav-item" >
-                  <a class="nav-link active" href="/fretex">Fretexbosker</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/pant">Panteautomater</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/recycle">Miljøstasjoner</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/login">Logg inn</a>
-              </li>
+<div class="navBar">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light justify-content-center">
+        <a class="navbar-brand" href="/">MS</a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Om oss</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/pant">Pant</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/fretex">Fretex</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/recycle">Miljøstasjoner</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Logg inn</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/registeruser">Registrer</a>
+            </li>
+        </ul>
 
-          </ul>
+        <!--<span class="navbar-text white-text">
+          Navbar text with an inline element
+        </span>-->
     </nav>
+    <form action="" method="post">
+        <div id="formWrapper">
 
-<div class="container">
+            <div id="form">
+                <div class="logo">
+                    <h1 class="text-center head">Log inn</h1>
+                </div>
+                <div class="form-item">
+                    <p class="formLabel">Email</p>
+                    <input type="email" name="email" id="email" class="form-style" autocomplete="off"/>
+                </div>
+                <div class="form-item">
+                    <p class="formLabel">Password</p>
+                    <input type="password" name="password" id="password" class="form-style"/>
+                    <!-- <div class="pw-view"><i class="fa fa-eye"></i></div> -->
 
-<h2>Login Form</h2>
-
-  <form action="/action_page.php">
-    <div class="imgcontainer">
-      <img src="../static/images/background.jpg" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container">
-      <label><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
-
-      <label><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-
-      <button href="http://127.0.0.1:5000/" type="submit">Login</button>
-
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <a href="http://127.0.0.1:5000/">
-        <button type="button" class="cancelbtn">Cancel</button>
-      </a>
-      <a href="http://127.0.0.1:5000/registeruser">
-        <button type="button" class="registerbtn">Registrer ny bruker</button>
-      </a>
-      <span class="psw">Forgot <a href="http://127.0.0.1:5000/">password?</a></span>
-    </div>
-  </form>
+                </div>
+                <div class="form-item">
+                    <p class="pull-left"><a href="/registeruser">
+                        <small>Register</small>
+                    </a></p>
+                    <input type="submit" class="login pull-right" value="Log Inn">
+                    <div class="clear-fix"></div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 </body>
 </html>
