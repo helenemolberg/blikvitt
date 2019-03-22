@@ -65,7 +65,7 @@ def hello_world():
 
 @application.route('/fretex')
 def fretex():
-    return render_template('position_test.html')
+    return render_template('fretex.html')
 
 
 @application.route('/pant')
