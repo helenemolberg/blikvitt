@@ -120,28 +120,36 @@
                     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                     maxZoom: 18,
                     id: 'mapbox.streets',
+                   layers:[stores,boxes],
                     accessToken: 'pk.eyJ1Ijoibm9yYWJyYXNrIiwiYSI6ImNqcmFqZmpiZTAweGw0M3VwZWNrbDBmYTMifQ.AOxh5UWfWvR5c_my3yPTBQ'
-                }).addTo(map);
+                });
+
+               baseMaps = {
+                   "basemap": map
+               };
+               overlayMaps = {
+                   "Butikker": stores,
+                   "Innsamlingspunkt": boxes
+               };
+
+
 
                filtered = [(63.42983445294848, 10.368214199539029), (63.439024006030465, 10.42835219928823)]
 
-               marker = new L.marker([63.42983445294848, 10.368214199539029]).addTo(map);
-               fjordgata = new L.marker([63.434902, 10.39895]).addTo(map);
+
+
+               box1 = new L.marker([63.411443 , 10.399918]).bindPopup("<b>Innsamlingsboks Lerkendal Studentby</b><br> Klæbuveien 130").openPopup();
+               fjordgata = new L.marker([63.434902, 10.39895]).bindPopup("<b> Fretex Fjordgata</b> Fjordgata 40, 7010 Trondheim <b>").openPopup();
                nardo = new L.marker([63.409408, 10.4188753]).addTo(map);
                rosenborg = new L.marker([63.4338341, 10.4160679]).addTo(map);
 
-               marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-               fjordgata.bindPopup("<b> Fretex Fjordgata</b> Fjordgata 40, 7010 Trondheim <b>").openPopup();
+               stores = L.layergroup([fjordgata,nardo,rosenborg]);
+               boxes = L.layergroup([box1]);
                nardo.bindPopup("<b> Fretex Nardo</b> Nardovegen 10, 7032 Trondheim<b>").openPopup();
                rosenborg.bindPopup("<b> Fretex Bruktbutikk</b> Rosenborg gate 9B, 7043 Trondheim <b>").openPopup();
 
-               for (var i = 0; i < filtered.length; i++) {
-                    marker = new L.marker([filtered[i][1],filtered[i][2]]).addTo(map);
-                }
 
-               for (var i = 0; i < filtered.length; i++) {
-                    marker = new L.marker([filtered[i][1],filtered[i][2]]).addTo(map);
-                }
+
             </script>
             <br>
              <a href="https://www.fretex.no/">
