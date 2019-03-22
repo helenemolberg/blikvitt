@@ -1,0 +1,158 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Fretex</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <title>Leaflet Locate</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
+    <script src='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.css' rel='stylesheet'/>
+
+
+    <link rel="stylesheet" type="text/css" href="../static/underPages.css">
+    <link rel="stylesheet" href="/w3css/4/w3.css">
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font: 400 15px/1.8 "Lato", sans-serif;
+            color: #777;
+        }
+        .bgimg-1, .bgimg-2, .bgimg-3 {
+            position: relative;
+            opacity: 0.65;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .bgimg-1 {
+            background-image: url("/static/images/fretex_img.jpg");
+            height: 100%;
+        }
+        .caption {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            text-align: center;
+            color: #000;
+        }
+        .caption span.border {
+            background-color: #111;
+            color: #fff;
+            padding: 18px;
+            font-size: 25px;
+            letter-spacing: 10px;
+        }
+        .nav-link {
+            font-size: 18px;
+            font-family: "Bell MT";
+        }
+    </style>
+
+</head>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+
+<div class="navBar">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light justify-content-center">
+        <a class="navbar-brand" href="/">MS</a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Om oss</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/pant">Pant</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/fretex">Fretex</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/recycle">Miljøstasjoner</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Logg inn</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/registeruser">Registrer</a>
+            </li>
+        </ul>
+
+
+    </nav>
+</div>
+<div class="bgimg-1">
+    <div class="caption">
+        <span class="border">Har du noen klær?</span><br>
+        <span class="border">Putt de her!</span>
+    </div>
+</div>
+<br/>
+<div id="space_maker"><h1> Finn din nærmeste miljøstasjon </h1>
+    <br/>
+    <div style="text-align: center;">
+        <div>
+            <h5> Hva leter du etter? </h5>
+            <form action="/action_page.php">
+                <input type="checkbox" name="recproduct" value="plastic"> Nærmeste innsamlingspunkt<br>
+                <input type="checkbox" name="recproduct" value="metal" checked> Nærmeste Fretex-utsalg<br>
+            </form>
+
+        </div>
+    </div>
+
+    <br/>
+
+    <!-- Plug inn for å finne lokasjon-->
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.mapbox.css'
+          rel='stylesheet'/>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/css/font-awesome.min.css'
+          rel='stylesheet'/>
+
+    <div id='map'></div>
+    <script>
+        L.mapbox.accessToken = 'pk.eyJ1Ijoia3JpcmFhZSIsImEiOiJjanJxbTRldHUxOGQ3NDNwc2hybmdubDIzIn0.R7z_ugziZy82yW5MkCQFeA';
+        L.mapbox.maxZoom = 18;
+        L.mapbox.id = 'mapbox.streets';
+        L.mapbox.attribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+
+        var map = L.mapbox.map('map')
+            .setView([63.426112, 10.400906], 13)
+            .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+
+<!-- Legger til Lokasjon i kartet-->
+        L.control.locate().addTo(map);
+
+        if
+        box1 = new L.marker([63.411443, 10.399918]).bindPopup("<b>Innsamlingsboks Lerkendal Studentby</b>" +
+            "<br> Klæbuveien 130").addTo(map);
+
+        nardo = new L.marker([63.409408, 10.4188753]).bindPopup("<b> Fretex Nardo</b>" +
+            " Nardovegen 10, 7032 Trondheim<b>").addTo(map);
+        fjordgata = new L.marker([63.434902, 10.39895]).bindPopup("<b> Fretex Fjordgata</b> " +
+            "Fjordgata 40, 7010 Trondheim <b>").addTo(map);
+
+    </script>
+    <br>
+    <a href="https://www.fretex.no/">
+        <button type="submit" id="big_button"> Les mer om Fretex</button>
+    </a>
+</div>
+</body>
+</html>
