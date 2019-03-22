@@ -33,19 +33,17 @@ class User(db.Model):
 class RecycleData(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
-    postalcode = db.Column(db.Integer, nullable=False)
     lat = db.Column(db.DECIMAL, nullable=False)
     long = db.Column(db.DECIMAL, nullable=False)
-    extraInfo = db.Column(db.String(80))
+    comment = db.Column(db.String(80))
 
 
 class FretexData(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
-    postalcode = db.Column(db.Integer, nullable=False)
     lat = db.Column(db.DECIMAL, nullable=False)
     long = db.Column(db.DECIMAL, nullable=False)
-    extraInfo = db.Column(db.String(80))
+    comment = db.Column(db.String(80))
 
 
 class PantData(db.Model):
@@ -54,7 +52,7 @@ class PantData(db.Model):
     postalcode = db.Column(db.Integer, nullable=False)
     lat = db.Column(db.DECIMAL, nullable=False)
     long = db.Column(db.DECIMAL, nullable=False)
-    extraInfo = db.Column(db.String(80))
+    comment = db.Column(db.String(80))
 
 
 '''Rendering html'''
