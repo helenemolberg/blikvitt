@@ -108,7 +108,7 @@ def registeruser():
         db.session.commit()
         return render_template('registerUser.html', message=f'{user.email} created')
     else:
-        return render_template('registerUser.html', message='Please fill in this form to create an account.')
+        return render_template('registerUser.html', message='Fyll inn nødvendig informasjon for å registrere bruker.')
 
 
 if __name__ == '__main__':
