@@ -5,6 +5,9 @@ from flask_migrate import Migrate, MigrateCommand
 
 import config
 
+'''Boolean for login-function'''
+isLoggedIn = False
+
 '''Database connection'''
 application = Flask(__name__)
 application.config['SQLALCHEMY_DATABASE_URI'] = config.DATABASE_URI
@@ -27,7 +30,7 @@ class User(db.Model):
     password = db.Column(db.String(80))
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<User %r>' % self.email
 
 
 class RecycleData(db.Model):
@@ -80,19 +83,30 @@ def recycle():
 
 @application.route('/login', methods=('get', 'post'))
 def login():
-    return render_template('userLogin.html')
+    if request.method == 'POST':
+        form = request.form
+        if User.query.filter_by(email=request.form['email']).count() > 0:
+            if User.query.filter_by(password=request.form['password']).count() > 0:
+                isLoggedIn = True
+                return render_template('userLogin.html', message=f'du er logget inn')
+            else:
+                return render_template('userLogin.html', message=f'Feil passord')
+        else:
+            return render_template('userLogin.html', message=f'Feil email')
+    else:
+        return render_template('userLogin.html', message='')
 
 
 @application.route('/registeruser', methods=('get', 'post'))
 def registeruser():
     if request.method == 'POST':
         form = request.form
-        if User.query.filter_by(username=request.form['email']).count() > 0:
+        if User.query.filter_by(email=request.form['email']).count() > 0:
             return render_template('registerUser.html', message=f'{form["email"]} already exists')
-        user = User(username=form['email'], email=form['email'])
+        user = User(email=form['email'], password=form['password'])
         db.session.add(user)
         db.session.commit()
-        return render_template('registerUser.html', message=f'{user.username} created')
+        return render_template('registerUser.html', message=f'{user.email} created')
     else:
         return render_template('registerUser.html', message='Please fill in this form to create an account.')
 
