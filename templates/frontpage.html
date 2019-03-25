@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <style>
 body, html {
   height: 100%;
@@ -102,6 +103,7 @@ img:hover {
 </style>
 </head>
 <body>
+
 <div class="navBar">
     <nav class="navbar fixed-top navbar-expand-lg navbar-light justify-content-center">
         <a class="navbar-brand" href="/">BK</a>
@@ -117,12 +119,14 @@ img:hover {
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Logg inn</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/registeruser">Registrer</a>
-            </li>
+            {% if not isLoggedIn %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Logg inn</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/registeruser">Registrer</a>
+                </li>
+            {% endif %}
         </ul>
 
         <!--<span class="navbar-text white-text">
@@ -135,47 +139,9 @@ img:hover {
     <span class="border">BLI KVITT!</span><br>
     <span class="border2">En kartapplikasjon for avfall i Trondheim</span><br>
       <br><br><br><br><span class="border3">Nettsiden er til for at du som bruker lettere kan finne plasseringen<br> til ulike
-      typer avfall i trondheimsområdet.<br><br> Scroll ned for mer informasjon</span>
+      typer avfall i trondheimsområdet.<br>
   </div>
 </div>
-
-<section class="different-stations" id="stations">
-    <div class="container">
-        <div class="col-3">
-            <div class="feature-item">
-                <div class="pant" style="position: absolute;" >
-                    <a href="pant">
-                        <img src="/static/images/Pantbilde-300.jpg">
-                    </a>
-                    <h4>Finn panteautomat</h4>
-                    <p>Trykk på bilde for å finne ut hvor din nærmeste panteautomat er plassert.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="feature-item">
-                <div class="fretex" style="position: absolute; left: 400px;">
-                    <a href="fretex">
-                        <img src="/static/images/fretex.jpg">
-                    </a>
-                    <h4>Finn fretexboks</h4>
-                    <p>Trykk på bilde for å finne ut hvor din nærmeste fretexboks er plassert.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="feature-item">
-                <div class="gjennvinning" style="position: absolute; left: 800px;">
-                    <a href="recycle">
-                         <img src="/static/images/gjenn_1.jpg">
-                    </a>
-                    <h4>Finn miljøstasjon</h4>
-                    <p>Trykk på bilde for å finne ut hvor de ulike miljøstasjonene i Trondheim er plassert.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!--Footer-->
 <footer class="footer">
