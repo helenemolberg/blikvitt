@@ -28,8 +28,6 @@
   <script src='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.js'></script>
   <link href='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.css' rel='stylesheet'/>
 
-  <!--jquery-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
   <style>
     body, html {
@@ -39,7 +37,7 @@
       color: #777;
     }
 
-    .bgimg-1, .bgimg-2, .bgimg-3 {
+    .bgimg-1 {
       position: relative;
       opacity: 0.65;
       background-position: center;
@@ -92,15 +90,10 @@
 <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
 
-
-
 <div class="navBar">
   <nav class="navbar fixed-top navbar-expand-lg navbar-light justify-content-center">
     <a class="navbar-brand" href="/">BK</a>
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/">Om oss</a>
-      </li>
       <li class="nav-item">
         <a class="nav-link" href="/pant">Pant</a>
       </li>
@@ -124,8 +117,8 @@
 </div>
 <div class="bgimg-1">
   <div class="caption">
-    <span class="border">Pant alt. Alltid</span><br>
-    <span class="border">Les mer</span>
+    <span class="border">PANT ALT. Det har en verdi!</span><br>
+    <span class="border">Finn</span>
   </div>
 </div>
 
@@ -148,7 +141,7 @@
         <input type="radio" name="loc" value="hei" onclick="getCurrPosition()"> Huk av for å bruke din posisjon!<br>
       </form>
 
-<br/>
+      <br/>
       <button type="submit" id="big_button"
               onclick="findNearestMarker()">
         Finn din nærmeste pantestasjon!
@@ -164,12 +157,6 @@
   <div id="map"></div>
   <br/>
 
-  <div>
-    <p>Ønsker du å bli kvitt farlig avfall eller annet spesialavfall?</p>
-    <a href="https://trv.no/levere-avfall/heggstadmoen-gjenvinningsstasjon/">
-      <p>Sjekk ut Trondheim kommunes nettside for Heggestadmoen gjenvinningsstasjon</p>
-    </a>
-  </div>
 </div>
 </body>
 
@@ -201,7 +188,7 @@
     //LATITUDE
     var latitude = JSON.parse({{plats | tojson}});
     var lats = []
-    for (var i = 0; i < 11; i++) {
+    for (var i = 0; i < 32; i++) {
       var l = latitude[i]
       var lat = parseFloat(l)
       lats.push(lat)
@@ -210,7 +197,7 @@
     //LONGITUDE
     var longitude = JSON.parse({{plongs | tojson}});
     var longs = []
-    for (var i = 0; i < 11; i++) {
+    for (var i = 0; i < 32; i++) {
       var l = longitude[i]
       var long = parseFloat(l)
       longs.push(long)
@@ -218,7 +205,7 @@
 
     //Opretter liste
     latlongs = []
-    for (var i = 0; i < lats.length; i++) {
+    for (var i = 0; i < 32; i++) {
       latlongs.push([lats[i], longs[i]])
     }
     return latlongs
@@ -229,7 +216,7 @@
   function createAddressList() {
     var names = JSON.parse({{pnames | tojson}});
     var addresses = []
-    for (var i = 0; i < names.length; i++) {
+    for (var i = 0; i < 32; i++) {
       var n = names[i]
       addresses.push([n])
     }

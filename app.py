@@ -99,7 +99,7 @@ def pant():
     for p in pantData:
         tmp = pcomments.append(str(p.comment))
 
-    return render_template('recycle.html', lats=json.dumps(plats), longs=json.dumps(plongs), names=json.dumps(pnames),
+    return render_template('pant.html', plats=json.dumps(plats), plongs=json.dumps(plongs), pnames=json.dumps(pnames),
                            comments=json.dumps(pcomments))
 
 
