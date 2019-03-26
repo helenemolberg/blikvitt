@@ -224,7 +224,7 @@
     //LATITUDE
     var latitude = JSON.parse({{plats | tojson}});
     var lats = []
-    for (var i = 0; i < 32; i++) {
+    for (var i = 0; i < 68; i++) {
       var l = latitude[i]
       var lat = parseFloat(l)
       lats.push(lat)
@@ -233,7 +233,7 @@
     //LONGITUDE
     var longitude = JSON.parse({{plongs | tojson}});
     var longs = []
-    for (var i = 0; i < 32; i++) {
+    for (var i = 0; i < 68; i++) {
       var l = longitude[i]
       var long = parseFloat(l)
       longs.push(long)
@@ -241,7 +241,7 @@
 
     //Opretter liste
     latlongs = []
-    for (var i = 0; i < 32; i++) {
+    for (var i = 0; i < 68; i++) {
       latlongs.push([lats[i], longs[i]])
     }
     return latlongs
@@ -252,7 +252,7 @@
   function createAddressList() {
     var names = JSON.parse({{pnames | tojson}});
     var addresses = []
-    for (var i = 0; i < 32; i++) {
+    for (var i = 0; i < 68; i++) {
       var n = names[i]
       addresses.push([n])
     }
@@ -352,7 +352,7 @@
     nearestPopup.popupOpen = true
     var nearestMarker = L.marker(nearestLatLng).bindPopup(nearestPopup).addTo(map);
 
-    alert("Du finner din nærmeste miljøstasjon ved" + nearest_text)
+    alert("Du finner din nærmeste miljøstasjon ved " + nearest_text)
 
     //var polyline = L.polyline([nearestLatLng, origin], {color: 'red'}).addTo(map);
 
