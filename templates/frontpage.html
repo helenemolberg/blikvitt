@@ -119,14 +119,20 @@ img:hover {
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            {% if not isLoggedIn %}
+            {% block body %}
+            {% if session['logged_in'] %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logg ut</a>
+                </li>
+            {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Logg inn</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/registeruser">Registrer</a>
                 </li>
-            {% endif %}
+                {% endif %}
+            {% endblock %}
         </ul>
 
         <!--<span class="navbar-text white-text">
