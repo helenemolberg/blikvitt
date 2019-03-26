@@ -67,10 +67,31 @@
       letter-spacing: 10px;
     }
 
+    .caption span.border3 {
+    background-color: #111;
+    color: #fff;
+    padding: 14px;
+    font-size: 16px;
+    letter-spacing: 3px;
+    margin-top: 25px;
+}
     .nav-link {
       font-size: 18px;
       font-family: "Bell MT";
     }
+    .footer {
+        width: 100%;
+        background-color: #111111;
+        opacity: 0.65;
+        color: white;
+        text-align: center;
+        height: 200px;
+    }
+      .container{
+    margin-top: 100px;
+    min-height: 100%;
+    padding-bottom: 200px;
+}
   </style>
 
 </head>
@@ -105,59 +126,74 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li class="nav-item">
-        <a class="nav-link" href="/login">Logg inn</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/registeruser">Registrer</a>
-      </li>
+      {% block body %}
+            {% if session['logged_in'] %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logg ut</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Logg inn</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/registeruser">Registrer</a>
+                </li>
+                {% endif %}
+            {% endblock %}
     </ul>
 
   </nav>
 </div>
 <div class="bgimg-1">
   <div class="caption">
-    <span class="border">PANT ALT. Det har en verdi!</span><br>
-    <span class="border">Finn</span>
+    <span class="border">PANT ALT. DET HAR EN VERDI!</span><br>
+      <br><br><br><br><span class="border3">Finn ut hvor din nærmeste panteautomat ligger.
+      <br><br> Scroll ned for å se kartet</span>
   </div>
 </div>
 
 <br/>
-<div id="space_maker"><h1> Pant </h1>
-  <br/>
-  <div style="text-align: center;">
-    <div>
-      <h5> PANT!! </h5>
-      <!--<h5> Hva ønsker du å resirkulere? </h5>
-      <form action="/action_page.php">
-        <input type="checkbox" name="recproduct" value="plastic"> Plast<br>
-        <input type="checkbox" name="recproduct" value="metal"> Metall og glass<br>
-        <input type="checkbox" id="paperCheck" name="recproduct" value="paper" onclick="showPaper()"> Papp og papir<br>
-        <input type="checkbox" name="recproduct" value="electric"> Elektrisk avfall <br>
-      </form>-->
+<section class="container">
+    <div id="space_maker"><h1> Pant </h1>
+        <br/>
+        <div style="text-align: center;">
+            <div>
+                <h5> PANT!! </h5>
+
+                <form method="post" id="pos">
+                    <input type="radio" name="loc" value="hei" onclick="getCurrPosition()"> Huk av for å bruke din
+                    posisjon!<br>
+                </form>
+
+                <br/>
+                <button type="submit" id="big_button"
+                        onclick="findNearestMarker()">
+                    Finn din nærmeste pantestasjon!
+                </button>
 
 
-      <form method="post" id="pos">
-        <input type="radio" name="loc" value="hei" onclick="getCurrPosition()"> Huk av for å bruke din posisjon!<br>
-      </form>
+            </div>
+        </div>
 
-      <br/>
-      <button type="submit" id="big_button"
-              onclick="findNearestMarker()">
-        Finn din nærmeste pantestasjon!
-      </button>
 
+        <br/>
+
+        <div id="map"></div>
+        <br/>
 
     </div>
-  </div>
+</section>
 
-
-  <br/>
-
-  <div id="map"></div>
-  <br/>
-
-</div>
+<!--Footer-->
+<footer class="footer">
+    <div class="footer">
+        <div>
+            <br><h6>Takk til fretex, Trondheim kommune og infinitum for data</h6>
+            <br><h5>Laget med kjærlighet av:</h5><br>
+            <h6>Kristin Raaen, Nora S. Brask og Helene S. Molberg</h6>
+        </div>
+    </div>
+</footer>
 </body>
 
 <!--<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>-->
