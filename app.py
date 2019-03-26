@@ -1,15 +1,18 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
+import os
 import config
 
 '''Boolean for login-function'''
 isLoggedIn = False
 
+
 '''Database connection'''
 application = Flask(__name__)
+application.secret_key = os.urandom(12)
 application.config['SQLALCHEMY_DATABASE_URI'] = config.DATABASE_URI
 
 '''Using SQLAlchemy and Migrate'''
@@ -62,8 +65,11 @@ class PantData(db.Model):
 
 
 @application.route('/')
-def hello_world():
-    return render_template('frontpage.html')
+def home():
+    if not session.get('logged_in'):
+        return render_template('frontpage.html')
+    else:
+        return render_template('frontpage.html')
 
 
 @application.route('/fretex')
@@ -87,8 +93,8 @@ def login():
         form = request.form
         if User.query.filter_by(email=request.form['email']).count() > 0:
             if User.query.filter_by(password=request.form['password']).count() > 0:
-                isLoggedIn = True
-                return render_template('userLogin.html', message=f'du er logget inn')
+                session['logged_in'] = True
+                return render_template('frontpage.html', isLoggedIn=True, message=f'du er logget inn')
             else:
                 return render_template('userLogin.html', message=f'Feil passord')
         else:
@@ -97,18 +103,24 @@ def login():
         return render_template('userLogin.html', message='')
 
 
+@application.route('/logout')
+def logout():
+    session['logged_in'] = False
+    return home()
+
+
 @application.route('/registeruser', methods=('get', 'post'))
 def registeruser():
     if request.method == 'POST':
         form = request.form
         if User.query.filter_by(email=request.form['email']).count() > 0:
-            return render_template('registerUser.html', message=f'{form["email"]} already exists')
+            return render_template('registerUser.html', message=f'{form["email"]} finnes allerede')
         user = User(email=form['email'], password=form['password'])
         db.session.add(user)
         db.session.commit()
-        return render_template('registerUser.html', message=f'{user.email} created')
+        return render_template('registerUser.html', message=f'{user.email} er opprettet')
     else:
-        return render_template('registerUser.html', message='Please fill in this form to create an account.')
+        return render_template('registerUser.html', message='Fyll inn nødvendig informasjon for å registrere bruker.')
 
 
 if __name__ == '__main__':

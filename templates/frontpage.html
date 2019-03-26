@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <style>
 body, html {
   height: 100%;
@@ -14,7 +15,7 @@ body, html {
   font: 400 15px/1.8 "Lato", sans-serif;
   color: #777;
 }
-.bgimg-1, .bgimg-2, .bgimg-3 {
+.bgimg-1 {
   position: relative;
   opacity: 0.65;
   background-position: center;
@@ -47,6 +48,14 @@ body, html {
     font-size: 18px;
     letter-spacing: 5px;
 }
+.caption span.border3 {
+    background-color: #111;
+    color: #fff;
+    padding: 14px;
+    font-size: 16px;
+    letter-spacing: 3px;
+    margin-top: 25px;
+}
 h3 {
   letter-spacing: 5px;
   text-transform: uppercase;
@@ -66,6 +75,8 @@ img:hover {
 
 .container{
     margin-top: 100px;
+    min-height: 100%;
+    padding-bottom: 400px;
 }
 
 .nav-link{
@@ -81,28 +92,22 @@ img:hover {
 .feature-item{
     text-align: center;
 }
-
-.col-2{
-    position: relative;
+.footer {
     width: 100%;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-}
-.footer{
-    margin-top: 50px;
-    margin-bottom: 50px;
+    background-color: #111111;
+    opacity: 0.65;
+    color: white;
+    text-align: center;
+    height: 200px;
 }
 </style>
 </head>
 <body>
+
 <div class="navBar">
     <nav class="navbar fixed-top navbar-expand-lg navbar-light justify-content-center">
-        <a class="navbar-brand" href="/">MS</a>
+        <a class="navbar-brand" href="/">BK</a>
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Om oss</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="/pant">Pant</a>
           </li>
@@ -114,12 +119,20 @@ img:hover {
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Logg inn</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/registeruser">Registrer</a>
-            </li>
+            {% block body %}
+            {% if session['logged_in'] %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logg ut</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Logg inn</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/registeruser">Registrer</a>
+                </li>
+                {% endif %}
+            {% endblock %}
         </ul>
 
         <!--<span class="navbar-text white-text">
@@ -130,52 +143,19 @@ img:hover {
 <div class="bgimg-1">
   <div class="caption">
     <span class="border">BLI KVITT!</span><br>
-    <span class="border2">En kartapplikasjon for avfall i Trondheim</span>
+    <span class="border2">En kartapplikasjon for avfall i Trondheim</span><br>
+      <br><br><br><br><span class="border3">Nettsiden er til for at du som bruker lettere kan finne plasseringen<br> til ulike
+      typer avfall i trondheimsområdet.<br>
   </div>
 </div>
 
-<section class="different-stations" id="stations">
-    <div class="container">
-        <div class="col-3">
-            <div class="feature-item">
-                <div class="pant" style="position: absolute;" >
-                    <a href="pant">
-                        <img src="/static/images/Pantbilde-300.jpg">
-                    </a>
-                    <h4>Finn panteautomat</h4>
-                    <p>Trykk på bilde for å finne ut hvor panteautomatene i Trondheim er plassert.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="feature-item">
-                <div class="fretex" style="position: absolute; left: 400px;">
-                    <a href="fretex">
-                        <img src="/static/images/fretex.jpg">
-                    </a>
-                    <h4>Finn fretexboks</h4>
-                    <p>Trykk på bilde for å finne ut hvor fretexboksene i Trondheim er plassert.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="feature-item">
-                <div class="gjennvinning" style="position: absolute; left: 800px;">
-                    <a href="recycle">
-                         <img src="/static/images/gjenn_1.jpg">
-                    </a>
-                    <h4>Finn miljøstasjon</h4>
-                    <p>Trykk på bilde for å finne ut hvor de ulike miljøstasjonene i Trondheim er plassert.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!--Footer-->
 <footer class="footer">
-    <div class="container">
-        <div class="col-2">
-            <h4>Lenker</h4>
-            <!--Kan liste opp lenker til de ulike sidene hvor man kan finne mer informasjon-->
+    <div class="footer">
+        <div>
+            <br><h6>Takk til fretex, Trondheim kommune og infinitum for data</h6>
+            <br><h5>Laget med kjærlighet av:</h5><br>
+            <h6>Kristin Raaen, Nora S. Brask og Helene S. Molberg</h6>
         </div>
     </div>
 </footer>
