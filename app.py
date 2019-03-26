@@ -1,7 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
+from flask import json
+from flask import Response
+# from flask import request
 
 import config
 
@@ -19,7 +22,6 @@ migrate = Migrate(application, db)
 '''Know we can use flask command, can write flask db --help'''
 manager = Manager(application)
 manager.add_command('db', MigrateCommand)
-
 
 '''Creating tables for the database'''
 
@@ -76,9 +78,24 @@ def pant():
     return render_template('pant.html')
 
 
-@application.route('/recycle')
+@application.route('/recycle', methods=['GET', 'POST'])
+
 def recycle():
-    return render_template('recycle.html')
+        recData = RecycleData.query.all()
+        lats = []
+        longs = []
+        names = []
+
+        for r in recData:
+            tmp = lats.append(str(r.lat))
+
+        for r in recData:
+            tmp = longs.append(str(r.long))
+
+        for r in recData:
+            tmp = names.append(str(r.name))
+
+        return render_template('recycle.html', lats=json.dumps(lats), longs=json.dumps(longs), names=json.dumps(names))
 
 
 @application.route('/login', methods=('get', 'post'))
@@ -113,6 +130,5 @@ def registeruser():
 
 if __name__ == '__main__':
     manager.run()
-
 
 '''to create a new table use db.create_all()'''
