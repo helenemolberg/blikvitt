@@ -81,7 +81,26 @@ def fretex():
 
 @application.route('/pant')
 def pant():
-    return render_template('pant.html')
+    pantData = PantData.query.all()
+    plats = []
+    plongs = []
+    pnames = []
+    pcomments = []
+
+    for p in pantData:
+        tmp = plats.append(str(p.lat))
+
+    for p in pantData:
+        tmp = plongs.append(str(p.long))
+
+    for p in pantData:
+        tmp = pnames.append(str(p.name))
+
+    for p in pantData:
+        tmp = pcomments.append(str(p.comment))
+
+    return render_template('pant.html', plats=json.dumps(plats), plongs=json.dumps(plongs), pnames=json.dumps(pnames),
+                           comments=json.dumps(pcomments))
 
 
 @application.route('/recycle', methods=['GET', 'POST'])
