@@ -152,37 +152,38 @@
   </div>
 </div>
 
-<br/>
-<section class="container">
-    <div id="space_maker"><h1> Pant </h1>
+<div id="space_maker">
+
+
+  <div style="text-align: center;">
+    <div class="row">
+      <div style="float: left; width: 25%; padding: 15px;">
         <br/>
-        <div style="text-align: center;">
-            <div>
-                <h5> PANT!! </h5>
-
-                <form method="post" id="pos">
-                    <input type="radio" name="loc" value="hei" onclick="getCurrPosition()"> Huk av for å bruke din
-                    posisjon!<br>
-                </form>
-
-                <br/>
-                <button type="submit" id="big_button"
-                        onclick="findNearestMarker()">
-                    Finn din nærmeste pantestasjon!
-                </button>
-
-
-            </div>
-        </div>
-
-
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+         <br/>
         <br/>
 
+        <form method="post" id="pos">
+          <input type="radio" name="loc" value="hei" onclick="getCurrPosition()"> Huk av for å bruke din posisjon!<br>
+        </form>
+        <br/>
+        <button type="submit" id="big_button"
+                onclick="findNearestMarker()">
+          Finn din nærmeste miljøstasjon
+        </button>
+      </div>
+      <div class="column">
+        <br/>
         <div id="map"></div>
-        <br/>
-
+      </div>
     </div>
-</section>
+  </div>
+  <br/>
+</div>
+
 
 <!--Footer-->
 <footer class="footer">
@@ -224,7 +225,7 @@
     //LATITUDE
     var latitude = JSON.parse({{plats | tojson}});
     var lats = []
-    for (var i = 0; i < 32; i++) {
+    for (var i = 0; i < 68; i++) {
       var l = latitude[i]
       var lat = parseFloat(l)
       lats.push(lat)
@@ -233,7 +234,7 @@
     //LONGITUDE
     var longitude = JSON.parse({{plongs | tojson}});
     var longs = []
-    for (var i = 0; i < 32; i++) {
+    for (var i = 0; i < 68; i++) {
       var l = longitude[i]
       var long = parseFloat(l)
       longs.push(long)
@@ -241,7 +242,7 @@
 
     //Opretter liste
     latlongs = []
-    for (var i = 0; i < 32; i++) {
+    for (var i = 0; i < 68; i++) {
       latlongs.push([lats[i], longs[i]])
     }
     return latlongs
@@ -252,7 +253,7 @@
   function createAddressList() {
     var names = JSON.parse({{pnames | tojson}});
     var addresses = []
-    for (var i = 0; i < 32; i++) {
+    for (var i = 0; i < 68; i++) {
       var n = names[i]
       addresses.push([n])
     }
