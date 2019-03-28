@@ -6,6 +6,7 @@ from flask import json
 from flask import Response
 # from flask import request
 
+
 import os
 import config
 
@@ -27,6 +28,13 @@ manager = Manager(application)
 manager.add_command('db', MigrateCommand)
 
 '''Creating tables for the database'''
+
+
+class Feedback(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    stationName = db.Column(db.String(50), nullable=False)
+    status = db.Column(db.String(50), nullable=False)
+    comment = db.Column(db.String(200), nullable=True)
 
 
 class User(db.Model):
@@ -74,9 +82,47 @@ def home():
         return render_template('frontpage.html')
 
 
-@application.route('/fretex')
+@application.route('/fretex', methods=('get', 'post'))
 def fretex():
-    return render_template('position_test.html')
+
+    if request.method == 'POST':
+        form = request.form
+        feedback = Feedback(stationName=form['station_name'], status=form['status'], comment=form['comment'])
+        db.session.add(feedback)
+        db.session.commit()
+
+    feedback = Feedback.query.all()
+    station_names = []
+    statuses = []
+    feedback_comments = []
+    fretexData = FretexData.query.all()
+    flats = []
+    flongs = []
+    fnames = []
+    fcomments = []
+
+    for r in feedback:
+        tmp = station_names.append(str(r.stationName))
+    for r in feedback:
+        tmp = statuses.append(str(r.status))
+    for r in feedback:
+        tmp = feedback_comments.append(str(r.comment))
+    for r in fretexData:
+        tmp = flats.append(str(r.lat))
+    for r in fretexData:
+        tmp = flongs.append(str(r.long))
+    for r in fretexData:
+        tmp = fnames.append(str(r.name))
+    for r in fretexData:
+        tmp = fcomments.append(str(r.comment))
+    return render_template('position_test.html', station_names=json.dumps(station_names),
+                           statuses=json.dumps(statuses), feedback_comments=json.dumps(feedback_comments),
+                           flats=json.dumps(flats), flongs=json.dumps(flongs),
+                           fnames=json.dumps(fnames), fcomments=json.dumps(fcomments)
+                           )
+
+
+
 
 
 @application.route('/pant')
