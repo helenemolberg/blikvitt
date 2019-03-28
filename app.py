@@ -10,8 +10,6 @@ from flask import Response
 import os
 import config
 
-'''Boolean for login-function'''
-isLoggedIn = False
 
 '''Database connection'''
 application = Flask(__name__)
@@ -22,9 +20,9 @@ application.config['SQLALCHEMY_DATABASE_URI'] = config.DATABASE_URI
 db = SQLAlchemy(application)
 migrate = Migrate(application, db)
 
-'''Know we can use flask command, can write flask db --help'''
 manager = Manager(application)
 manager.add_command('db', MigrateCommand)
+
 
 '''Creating tables for the database'''
 
@@ -84,9 +82,6 @@ class PantData(db.Model):
     comment = db.Column(db.String(80))
 
 
-
-
-
 '''Rendering html'''
 
 
@@ -103,6 +98,7 @@ def fretex():
     if request.method == 'POST':
         form = request.form
         feedback = Feedback(stationname=form['station_name'], status=form['status'], comment=form['comment'])
+        session['logged_in'] = True
         db.session.add(feedback)
         db.session.commit()
 
@@ -142,6 +138,7 @@ def pant():
         form = request.form
         pant_feedback = PantFeedback(pant_stationname=form['pant_station_name'], pant_status=form['pant_status'],
                                      pant_comment=form['pant_comment'])
+        session['logged_in'] = True
         db.session.add(pant_feedback)
         db.session.commit()
 
@@ -187,6 +184,7 @@ def recycle():
         form = request.form
         recycle_feedback = RecycleFeedback(recycle_stationname=form['recycle_station_name'], recycle_status=form['recycle_status'],
                                         recycle_comment=form['recycle_comment'])
+        session['logged_in'] = True
         db.session.add(recycle_feedback)
         db.session.commit()
 
@@ -261,4 +259,3 @@ def registeruser():
 if __name__ == '__main__':
     manager.run()
 
-'''to create a new table use db.create_all()'''
