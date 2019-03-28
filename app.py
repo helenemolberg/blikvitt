@@ -102,7 +102,7 @@ def fretex():
     fcomments = []
 
     for r in feedback:
-        tmp = station_names.append(str(r.stationName))
+        tmp = station_names.append(str(r.stationname))
     for r in feedback:
         tmp = statuses.append(str(r.status))
     for r in feedback:
