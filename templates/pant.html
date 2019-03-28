@@ -172,7 +172,7 @@
         <br/>
         <button type="submit" id="big_button"
                 onclick="findNearestMarker()">
-          Finn din nærmeste miljøstasjon
+          Finn din nærmeste panteautomat!
         </button>
       </div>
       <div class="column">
@@ -353,7 +353,7 @@
     nearestPopup.popupOpen = true
     var nearestMarker = L.marker(nearestLatLng).bindPopup(nearestPopup).addTo(map);
 
-    alert("Du finner din nærmeste miljøstasjon ved " + nearest_text)
+    alert("Du finner din nærmeste panteautomat ved " + nearest_text)
 
     //var polyline = L.polyline([nearestLatLng, origin], {color: 'red'}).addTo(map);
 
