@@ -2,20 +2,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Fretex</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/underPages.css">
+
+    <title>A Leaflet map!</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+          integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+            crossorigin=""></script>
+
+    <!--Shortest path - LINK -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"/>
+
 
     <title>Leaflet Locate</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
     <script src='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.css' rel='stylesheet'/>
 
-
-    <link rel="stylesheet" type="text/css" href="../static/underPages.css">
-    <link rel="stylesheet" href="/w3css/4/w3.css">
+    <!--jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
     <style>
         body, html {
@@ -24,6 +38,7 @@
             font: 400 15px/1.8 "Lato", sans-serif;
             color: #777;
         }
+
         .bgimg-1, .bgimg-2, .bgimg-3 {
             position: relative;
             opacity: 0.65;
@@ -31,10 +46,12 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+
         .bgimg-1 {
             background-image: url("/static/images/fretex_img.jpg");
             height: 100%;
         }
+
         .caption {
             position: absolute;
             left: 0;
@@ -43,6 +60,7 @@
             text-align: center;
             color: #000;
         }
+
         .caption span.border {
             background-color: #111;
             color: #fff;
@@ -50,20 +68,39 @@
             font-size: 25px;
             letter-spacing: 10px;
         }
+
         .nav-link {
             font-size: 18px;
             font-family: "Bell MT";
+        }
+
+        mark.yellow {
+            color: yellow;
+            background: none;
+        }
+
+        mark.blue {
+            color: #0000A0;
+            background: none;
         }
     </style>
 
 </head>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+<body>
+
+<!-- Plug inn for å finne lokasjon-->
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.mapbox.css'
+      rel='stylesheet'/>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/css/font-awesome.min.css'
+      rel='stylesheet'/>
+
+
+<title>Shortest path</title>
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
 
 <div class="navBar">
     <nav class="navbar fixed-top navbar-expand-lg navbar-light justify-content-center">
@@ -90,69 +127,385 @@
                 <a class="nav-link" href="/registeruser">Registrer</a>
             </li>
         </ul>
-
-
     </nav>
 </div>
+
 <div class="bgimg-1">
     <div class="caption">
-        <span class="border">Har du noen klær?</span><br>
-        <span class="border">Putt de her!</span>
+        <span class="border">Har du noen brukte klær?</span><br><br>
+        <span class="border">Lever de her!</span><br><br>
     </div>
 </div>
 <br/>
-<div id="space_maker"><h1> Finn din nærmeste miljøstasjon </h1>
+
+<div id="space_maker"><h1> Finn din nærmeste innsamlingsboks eller Fretex-butikk </h1>
     <br/>
     <div style="text-align: center;">
         <div>
-            <h5> Hva leter du etter? </h5>
-            <form action="/action_page.php">
-                <input type="checkbox" name="recproduct" value="plastic"> Nærmeste innsamlingspunkt<br>
-                <input type="checkbox" name="recproduct" value="metal" checked> Nærmeste Fretex-utsalg<br>
+            <form method="post" id="pos">
+                <input type="radio" name="loc" value="hei" onclick="getCurrPosition()"> Huk av for å bruke din posisjon!<br>
             </form>
-
+            <button type="submit" id="big_button" style="background-color: #777777"
+                    onclick="findNearestMarker()">
+                Finn din nærmeste miljøstasjon
+            </button>
         </div>
     </div>
-
+    <br/>
+    <div id="map"></div>
+    <div>
+        <p>De
+            <mark class="yellow"> gule</mark>
+            markørene viser Fretex sine butikker, og de
+            <mark class="blue">blå</mark>
+            viser innsamlingsbokser
+        </p>
+    </div>
     <br/>
 
-    <!-- Plug inn for å finne lokasjon-->
-    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js'></script>
-    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.mapbox.css'
-          rel='stylesheet'/>
-    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/css/font-awesome.min.css'
-          rel='stylesheet'/>
+    <div>
+        <p>Har du lyst til å lese mer om hvor klærne din havner?</p>
+        <a href="https://www.fretex.no/">
+            <p>Sjekk ut Fretex sine hjemmesider</p>
+        </a>
+    </div>
+</div>
 
-    <div id='map'></div>
-    <script>
-        L.mapbox.accessToken = 'pk.eyJ1Ijoia3JpcmFhZSIsImEiOiJjanJxbTRldHUxOGQ3NDNwc2hybmdubDIzIn0.R7z_ugziZy82yW5MkCQFeA';
-        L.mapbox.maxZoom = 18;
-        L.mapbox.id = 'mapbox.streets';
-        L.mapbox.attribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
 
-        var map = L.mapbox.map('map')
-            .setView([63.426112, 10.400906], 13)
-            .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+<script type="text/javaScript">
 
-<!-- Legger til Lokasjon i kartet-->
-        L.control.locate().addTo(map);
+    var redIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
 
-        if
-        box1 = new L.marker([63.411443, 10.399918]).bindPopup("<b>Innsamlingsboks Lerkendal Studentby</b>" +
-            "<br> Klæbuveien 130").addTo(map);
+    var yellowIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
 
-        nardo = new L.marker([63.409408, 10.4188753]).bindPopup("<b> Fretex Nardo</b>" +
-            " Nardovegen 10, 7032 Trondheim<b>").addTo(map);
-        fjordgata = new L.marker([63.434902, 10.39895]).bindPopup("<b> Fretex Fjordgata</b> " +
-            "Fjordgata 40, 7010 Trondheim <b>").addTo(map);
 
-    </script>
-    <br>
-    <a href="https://www.fretex.no/">
-        <button type="submit" id="big_button"> Les mer om Fretex</button>
-    </a>
+    var globalMarker = [];
+    var ORIGIN = [63.4264656812, 10.392372476357]
+
+
+    //HENTER FRA DATABASEN
+    var flatlongs = createCoordList()
+    var addresses = createAddressList()
+    var markersLatlng = []
+    var markers = []
+
+
+    function createCoordList() {
+        //LATITUDE
+        var latitude = JSON.parse({{flats | tojson}});
+        var flats = []
+        for (var i = 0; i < 118; i++) {
+            var l = latitude[i]
+            var lat = parseFloat(l)
+            flats.push(lat)
+        }
+        //LONGITUDE
+        var longitude = JSON.parse({{flongs | tojson}});
+        var flongs = []
+        for (var i = 0; i < 118; i++) {
+            var l = longitude[i]
+            var long = parseFloat(l)
+            flongs.push(long)
+        }
+        //Opretter liste
+        flatlongs = []
+        for (var i = 0; i < flats.length; i++) {
+            flatlongs.push([flats[i], flongs[i]])
+        }
+        return flatlongs
+    }
+
+    //Lager adresseliste
+    function createAddressList() {
+        var fnames = JSON.parse({{fnames | tojson}});
+        var addresses = []
+        for (var i = 0; i < fnames.length; i++) {
+            var n = fnames[i]
+            addresses.push([n])
+        }
+        return addresses
+    }
+
+
+    var map = L.map('map').setView([63.4264656812, 10.392372476357], 13);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1Ijoibm9yYWJyYXNrIiwiYSI6ImNqcmFqZmpiZTAweGw0M3VwZWNrbDBmYTMifQ.AOxh5UWfWvR5c_my3yPTBQ'
+    }).addTo(map);
+
+
+    nardo = new L.marker([63.409408, 10.4188753], {icon: yellowIcon}).bindPopup("<b> Fretex Nardo</b>" +
+        " Nardovegen 10, 7032 Trondheim<b>").addTo(map);
+    fjordgata = new L.marker([63.434902, 10.39895], {icon: yellowIcon}).bindPopup("<b> Fretex Fjordgata</b> " +
+        "Fjordgata 40, 7010 Trondheim <b>").addTo(map);
+    rosenborg = new L.marker([63.4338341, 10.4160679], {icon: yellowIcon}).bindPopup("<b> Fretex Bruktbutikk</b> " +
+        "Rosenborg gate 9B, 7043 Trondheim <b>").addTo(map);
+
+    function getCurrPosition() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (pos) {
+                //You have your location here
+                console.log("Latitude: " + pos.coords.latitude +
+                    " Longitude: " + pos.coords.longitude);
+                you = L.marker([pos.coords.latitude, pos.coords.longitude], {icon: redIcon});
+                you.addTo(map);
+                map.setView([pos.coords.latitude, pos.coords.longitude], 13, {animation: true});
+                globalMarker = [pos.coords.latitude, pos.coords.longitude];
+                console.log('hallo')
+                console.log(globalMarker)
+            });
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function createLayer(coordList) {
+        for (var i = 0; i < coordList.length; i++) {
+            var tmpPoint = L.latLng(coordList[i])
+            markersLatlng.push(tmpPoint)
+            var tmpMarker = L.marker(coordList[i])
+            myPopup = L.popup().setContent("<strong>" + addresses[i] + "</strong>");
+            tmpMarker.bindPopup(myPopup);
+            markers.push(tmpMarker)
+        }
+        var markerLayerGroup = L.layerGroup(markers);
+        markerLayerGroup.addTo(map)
+        return markerLayerGroup
+    }
+
+    coordLayer = createLayer(flatlongs)
+
+    function centerZoom(map, marker) {
+        map.setView(marker.getLatLng(), 16);
+    }
+
+    function findNearestMarker() {
+        var minDist = 1000000,
+            nearestLatLng = [63.4264656812, 10.392372476357],
+            nearest_text = '*None*',
+            markerDist = 0,
+            len = markers.length;
+        console.log(markersLatlng.length)
+        console.log(addresses.length)
+        ORIGIN = globalMarker;
+        console.log(globalMarker)
+        for (var i = 0; i < markersLatlng.length - 1; i += 1) {
+            markerDist = markersLatlng[i].distanceTo(ORIGIN)
+            if (markerDist < minDist) {
+                minDist = markerDist;
+                nearest_text = addresses[i];
+                nearestLatLng = markersLatlng[i]
+            }
+        }
+        console.log('FERDIG! ' + nearestLatLng)
+        console.log('her er coordlayer' + coordLayer)
+        L.Routing.control({
+            waypoints: [
+                L.latLng(ORIGIN),
+                L.latLng(nearestLatLng)
+            ],
+        }).addTo(map);
+        var originPopup = L.popup().setContent("<p>Du er her!</p> <strong>").openPopup();
+        originPopup.popupOpen = true
+        var originMarker = L.marker(ORIGIN, {icon: redIcon}).bindPopup(originPopup).addTo(map);
+        var nearestPopup = L.popup().setContent(" <strong>" + nearest_text + "</strong>").openPopup();
+        nearestPopup.popupOpen = true
+        var nearestMarker = L.marker(nearestLatLng).bindPopup(nearestPopup).addTo(map);
+        alert("Du finner din nærmeste fretexboks ved" + nearest_text)
+        //var polyline = L.polyline([nearestLatLng, origin], {color: 'red'}).addTo(map);
+        centerZoom(map, nearestMarker)
+        map.removeLayer(coordLayer)
+    }
+</script>
+
+
+<br>
+<br>
+<!-- Input og utput av kommentarer-->
+<script>
+    var stasjoner = createStationNameList()
+    var statuser = createStatusList()
+    var kommentarer = createCommentList()
+
+    function createStationNameList() {
+        var station_names = JSON.parse({{station_names|tojson}});
+        var stasjoner = []
+        for (var i = 0; i < station_names.length; i++) {
+            var n = station_names[i]
+            stasjoner.push([n])
+        }
+        return stasjoner
+    }
+
+    function createStatusList() {
+        var statuses = JSON.parse({{statuses|tojson}});
+        var statuser = []
+        for (var i = 0; i < statuses.length; i++) {
+            var n = statuses[i]
+            statuser.push([n])
+        }
+        return statuser
+    }
+
+    function createCommentList() {
+        var feedback_comments = JSON.parse({{ feedback_comments | tojson }});
+        var kommentarer = []
+        for (var i = 0; i < feedback_comments.length; i++) {
+            var n = feedback_comments[i]
+            kommentarer.push([n])
+        }
+        return kommentarer
+    }
+</script>
+
+<div class="row row-no-gutters">
+    <!-- Legger til kontaktskjema-->
+    <div class="col-md-6" style="padding-left: 100px ">
+        <form id="contact-form" method="post" action="" role="form">
+            <div class="messages"></div>
+            <div class="controls">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="station_nam">Innsamlingsboks eller butikk *</label>
+                            <input id="station_nam" type="text" name="station_name" class="form-control"
+                                   autocomplete="off"
+                                   placeholder="Navn på stasjon"
+                                   required="required"
+                                   data-error="Vennligst skriv inn navn på innsamlingsboksboks eller butikk">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="status">Hva vil du rapportere *</label>
+                            <select id="status" name="status" class="form-control" required="required"
+                                    data-error="Vennligst spesifiser hva du vil melde fra om">
+                                <option value=""></option>
+                                <option value="Full boks">Boksen er full</option>
+                                <option value="Feil på boks">Det er en feil på boksen</option>
+                                <option value="Feil i kart">Det er en feil i kartet</option>
+                                <option value="Annet">Annet</option>
+                            </select>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="comment">Melding</label>
+                            <textarea id="comment" name="comment" class="form-control"
+                                      placeholder="Skriv inn din melding" rows="4"
+                                      data-error="Please, leave us a message."></textarea>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <input type="submit" class="btn btn-success btn-send" value="Send inn"
+                               style="background-color: #777777;border-color: #777777">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <p class="text-muted">
+                            <strong>*</strong> Disse feltene må fylles inn
+                            <a href="https://bootstrapious.com/p/how-to-build-a-working-bootstrap-contact-form"
+                               target="_blank"></a></p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Legger til kommentarer-->
+    <div class="col-md-6" style=" padding-left: 70px">
+        <div class="col-md-12">
+            <caption>Kommentarer</caption>
+            <div id="table-scroll" style="border: 0.5px #777777 solid; box-sizing: border-box">
+                <table id="myTabel" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th>Stasjon</th>
+                        <th>Status</th>
+                        <th>Kommentarer</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Script for å legge inn kommentarene-->
+<script>
+    cols = 3;
+    var tableRef = document.getElementById("tableBody");
+
+    for (var i = 0; i < stasjoner.length; i += 1) {
+        var row = tableRef.insertRow(i);
+        for (var j = 0; j < cols; j += 1) {
+            var cell = row.insertCell(j);
+            if (j === 0) { // First td
+                var text = document.createTextNode(stasjoner[i]);
+                cell.appendChild(text);
+            }
+            if (j === 1) { // Second td
+                var text = document.createTextNode(statuser[i]);
+                cell.appendChild(text);
+            }
+            if (j === 2) { // Second td
+                var text = document.createTextNode(kommentarer[i]);
+                cell.appendChild(text);
+            }
+        }
+    }
+</script>
+<!-- Styling for feedback og kommentarboks-->
+<style>
+    table, th, td {
+        font: 400 15px/1.8 "Lato", sans-serif;
+        border: 0.5px solid #777777;
+        border-collapse: collapse;
+    }
+
+    th {
+        font: 600 15px/1.8 "Lato", sans-serif;
+    }
+
+    th, td {
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    #table-scroll {
+        height: 250px;
+        overflow: auto;
+        margin-top: 20px;
+    }
+</style>
 </div>
 </body>
 </html>
