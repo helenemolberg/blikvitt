@@ -32,7 +32,7 @@ manager.add_command('db', MigrateCommand)
 
 class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    stationName = db.Column(db.String(50), nullable=False)
+    station_name = db.Column(db.String(50), nullable=False)
     status = db.Column(db.String(50), nullable=False)
     comment = db.Column(db.String(200), nullable=True)
 
