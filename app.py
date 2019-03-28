@@ -47,7 +47,7 @@ class RecycleFeedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     recycle_stationname = db.Column(db.String(50), nullable=False)
     recycle_status = db.Column(db.String(50), nullable=False)
-    comment = db.Column(db.String(200), nullable=True)
+    recycle_comment = db.Column(db.String(200), nullable=True)
 
 
 class User(db.Model):
