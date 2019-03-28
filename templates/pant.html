@@ -122,7 +122,7 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      {% block body %}
+        {% block body %}
             {% if session['logged_in'] %}
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Logg ut</a>
@@ -134,8 +134,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/registeruser">Registrer</a>
                 </li>
-                {% endif %}
-            {% endblock %}
+            {% endif %}
+        {% endblock %}
     </ul>
 
   </nav>

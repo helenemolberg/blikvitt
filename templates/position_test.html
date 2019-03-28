@@ -50,7 +50,7 @@
             color: #777;
         }
 
-        .bgimg-1, .bgimg-2, .bgimg-3 {
+        .bgimg-1 {
             position: relative;
             opacity: 0.65;
             background-position: center;
@@ -94,6 +94,22 @@
             color: #0000A0;
             background: none;
         }
+        .footer {
+        width: 100%;
+        background-color: #111111;
+        opacity: 0.65;
+        color: white;
+        text-align: center;
+        height: 200px;
+    }
+        .caption span.border3 {
+    background-color: #111;
+    color: #fff;
+    padding: 14px;
+    font-size: 16px;
+    letter-spacing: 3px;
+    margin-top: 25px;
+}
     </style>
 
 </head>
@@ -115,11 +131,8 @@
 
 <div class="navBar">
     <nav class="navbar fixed-top navbar-expand-lg navbar-light justify-content-center">
-        <a class="navbar-brand" href="/">MS</a>
+        <a class="navbar-brand" href="/">BK</a>
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Om oss</a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/pant">Pant</a>
             </li>
@@ -131,12 +144,20 @@
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Logg inn</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/registeruser">Registrer</a>
-            </li>
+            {% block body %}
+            {% if session['logged_in'] %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logg ut</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Logg inn</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/registeruser">Registrer</a>
+                </li>
+            {% endif %}
+        {% endblock %}
         </ul>
     </nav>
 </div>
@@ -145,6 +166,8 @@
     <div class="caption">
         <span class="border">Har du noen brukte klær?</span><br><br>
         <span class="border">Lever de her!</span><br><br>
+        <br><br><br><br><span class="border3">Finn ut hvor din nærmeste fretexboks ligger.
+      <br><br> Scroll ned for å se kartet</span>
     </div>
 </div>
 <br/>
@@ -398,87 +421,91 @@
 </script>
 
 <div class="row row-no-gutters">
-    <!-- Legger til kontaktskjema-->
-    <div class="col-md-6" style="padding-left: 100px ">
-        <form id="contact-form" method="post" action="" role="form">
-            <div class="messages"></div>
-            <div class="controls">
-                <div class="row">
-                    <div class="col-md-10">
-                        <div class="form-group">
-                            <label for="station_nam">Innsamlingsboks eller butikk *</label>
-                            <input id="station_nam" type="text" name="station_name" class="form-control"
-                                   autocomplete="off"
-                                   placeholder="Navn på stasjon"
-                                   required="required"
-                                   data-error="Vennligst skriv inn navn på innsamlingsboksboks eller butikk">
-                            <div class="help-block with-errors"></div>
+    {% block feed %}
+        {% if session['logged_in'] %}
+            <!-- Legger til kontaktskjema-->
+            <div class="col-md-6" style="padding-left: 100px ">
+                <form id="contact-form" method="post" action="" role="form">
+                    <div class="messages"></div>
+                    <div class="controls">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="station_nam">Innsamlingsboks eller butikk *</label>
+                                    <input id="station_nam" type="text" name="station_name" class="form-control"
+                                           autocomplete="off"
+                                           placeholder="Navn på stasjon"
+                                           required="required"
+                                           data-error="Vennligst skriv inn navn på innsamlingsboksboks eller butikk">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="status">Hva vil du rapportere *</label>
+                                    <select id="status" name="status" class="form-control" required="required"
+                                            data-error="Vennligst spesifiser hva du vil melde fra om">
+                                        <option value=""></option>
+                                        <option value="Full boks">Boksen er full</option>
+                                        <option value="Feil på boks">Det er en feil på boksen</option>
+                                        <option value="Feil i kart">Det er en feil i kartet</option>
+                                        <option value="Annet">Annet</option>
+                                    </select>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="comment">Melding</label>
+                                    <textarea id="comment" name="comment" class="form-control"
+                                              placeholder="Skriv inn din melding" rows="4"
+                                              data-error="Please, leave us a message."></textarea>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input type="submit" class="btn btn-success btn-send" value="Send inn"
+                                       style="background-color: #777777;border-color: #777777">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <p class="text-muted">
+                                    <strong>*</strong> Disse feltene må fylles inn
+                                    <a href="https://bootstrapious.com/p/how-to-build-a-working-bootstrap-contact-form"
+                                       target="_blank"></a></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-10">
-                        <div class="form-group">
-                            <label for="status">Hva vil du rapportere *</label>
-                            <select id="status" name="status" class="form-control" required="required"
-                                    data-error="Vennligst spesifiser hva du vil melde fra om">
-                                <option value=""></option>
-                                <option value="Full boks">Boksen er full</option>
-                                <option value="Feil på boks">Det er en feil på boksen</option>
-                                <option value="Feil i kart">Det er en feil i kartet</option>
-                                <option value="Annet">Annet</option>
-                            </select>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-10">
-                        <div class="form-group">
-                            <label for="comment">Melding</label>
-                            <textarea id="comment" name="comment" class="form-control"
-                                      placeholder="Skriv inn din melding" rows="4"
-                                      data-error="Please, leave us a message."></textarea>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-10">
-                        <input type="submit" class="btn btn-success btn-send" value="Send inn"
-                               style="background-color: #777777;border-color: #777777">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-10">
-                        <p class="text-muted">
-                            <strong>*</strong> Disse feltene må fylles inn
-                            <a href="https://bootstrapious.com/p/how-to-build-a-working-bootstrap-contact-form"
-                               target="_blank"></a></p>
+                </form>
+            </div>
+            <!-- Legger til kommentarer-->
+            <div class="col-md-6" style=" padding-left: 70px">
+                <div class="col-md-12">
+                    <caption>Kommentarer</caption>
+                    <div id="table-scroll" style="border: 0.5px #777777 solid; box-sizing: border-box">
+                        <table id="myTabel" style="width: 100%">
+                            <thead>
+                            <tr>
+                                <th>Stasjon</th>
+                                <th>Status</th>
+                                <th>Kommentarer</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
-    <!-- Legger til kommentarer-->
-    <div class="col-md-6" style=" padding-left: 70px">
-        <div class="col-md-12">
-            <caption>Kommentarer</caption>
-            <div id="table-scroll" style="border: 0.5px #777777 solid; box-sizing: border-box">
-                <table id="myTabel" style="width: 100%">
-                    <thead>
-                    <tr>
-                        <th>Stasjon</th>
-                        <th>Status</th>
-                        <th>Kommentarer</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+        {% endif %}
+    {% endblock %}
 </div>
 <!-- Script for å legge inn kommentarene-->
 <script>
