@@ -13,7 +13,6 @@ import config
 '''Boolean for login-function'''
 isLoggedIn = False
 
-
 '''Database connection'''
 application = Flask(__name__)
 application.secret_key = os.urandom(12)
@@ -34,6 +33,20 @@ class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     stationname = db.Column(db.String(50), nullable=False)
     status = db.Column(db.String(50), nullable=False)
+    comment = db.Column(db.String(200), nullable=True)
+
+
+class PantFeedback(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    pant_stationname = db.Column(db.String(50), nullable=False)
+    pant_status = db.Column(db.String(50), nullable=False)
+    pant_comment = db.Column(db.String(200), nullable=True)
+
+
+class RecycleFeedback(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    recycle_stationname = db.Column(db.String(50), nullable=False)
+    recycle_status = db.Column(db.String(50), nullable=False)
     comment = db.Column(db.String(200), nullable=True)
 
 
@@ -71,6 +84,9 @@ class PantData(db.Model):
     comment = db.Column(db.String(80))
 
 
+
+
+
 '''Rendering html'''
 
 
@@ -84,7 +100,6 @@ def home():
 
 @application.route('/fretex', methods=('get', 'post'))
 def fretex():
-
     if request.method == 'POST':
         form = request.form
         feedback = Feedback(stationname=form['station_name'], status=form['status'], comment=form['comment'])
@@ -118,20 +133,34 @@ def fretex():
     return render_template('position_test.html', station_names=json.dumps(station_names),
                            statuses=json.dumps(statuses), feedback_comments=json.dumps(feedback_comments),
                            flats=json.dumps(flats), flongs=json.dumps(flongs),
-                           fnames=json.dumps(fnames), fcomments=json.dumps(fcomments)
-                           )
+                           fnames=json.dumps(fnames), fcomments=json.dumps(fcomments))
 
 
-
-
-
-@application.route('/pant')
+@application.route('/pant', methods=('get', 'post'))
 def pant():
+    if request.method == 'POST':
+        form = request.form
+        pant_feedback = PantFeedback(pant_stationname=form['pant_station_name'], pant_status=form['pant_status'],
+                                     pant_comment=form['pant_comment'])
+        db.session.add(pant_feedback)
+        db.session.commit()
+
     pantData = PantData.query.all()
     plats = []
     plongs = []
     pnames = []
     pcomments = []
+    pant_feedback = PantFeedback.query.all()
+    pant_station_names = []
+    pant_statuses = []
+    pant_feedback_comments = []
+
+    for r in pant_feedback:
+        tmp = pant_station_names.append(str(r.pant_stationname))
+    for r in pant_feedback:
+        tmp = pant_statuses.append(str(r.pant_status))
+    for r in pant_feedback:
+        tmp = pant_feedback_comments.append(str(r.pant_comment))
 
     for p in pantData:
         tmp = plats.append(str(p.lat))
@@ -145,28 +174,52 @@ def pant():
     for p in pantData:
         tmp = pcomments.append(str(p.comment))
 
-    return render_template('pant.html', plats=json.dumps(plats), plongs=json.dumps(plongs), pnames=json.dumps(pnames),
+    return render_template('pant.html', pant_station_names=json.dumps(pant_station_names),
+                           pant_statuses=json.dumps(pant_statuses),
+                           pant_feedback_comments=json.dumps(pant_feedback_comments),
+                           plats=json.dumps(plats), plongs=json.dumps(plongs), pnames=json.dumps(pnames),
                            comments=json.dumps(pcomments))
 
 
 @application.route('/recycle', methods=['GET', 'POST'])
-
 def recycle():
-        recData = RecycleData.query.all()
-        lats = []
-        longs = []
-        names = []
+    if request.method == 'POST':
+        form = request.form
+        recycle_feedback = PantFeedback(recycle_stationname=form['recycle_station_name'], recycle_status=form['recycle_status'],
+                                        recycle_comment=form['recycle_comment'])
+        db.session.add(recycle_feedback)
+        db.session.commit()
 
-        for r in recData:
-            tmp = lats.append(str(r.lat))
+    recData = RecycleData.query.all()
+    lats = []
+    longs = []
+    names = []
+    recycle_feedback = RecycleFeedback.query.all()
+    recycle_station_names = []
+    recycle_statuses = []
+    recycle_feedback_comments = []
 
-        for r in recData:
-            tmp = longs.append(str(r.long))
+    for r in recycle_feedback:
+        tmp = recycle_station_names.append(str(r.recycle_stationname))
+    for r in recycle_feedback:
+        tmp = recycle_statuses.append(str(r.recycle_status))
+    for r in recycle_feedback:
+        tmp = recycle_feedback_comments.append(str(r.recycle_comment))
 
-        for r in recData:
-            tmp = names.append(str(r.name))
 
-        return render_template('recycle.html', lats=json.dumps(lats), longs=json.dumps(longs), names=json.dumps(names))
+    for r in recData:
+        tmp = lats.append(str(r.lat))
+
+    for r in recData:
+        tmp = longs.append(str(r.long))
+
+    for r in recData:
+        tmp = names.append(str(r.name))
+
+    return render_template('recycle.html', recycle_station_names=json.dumps(recycle_station_names),
+                           recycle_statuses=json.dumps(recycle_statuses),
+                           recycle_feedback_comments=json.dumps(recycle_feedback_comments),
+                           lats=json.dumps(lats), longs=json.dumps(longs), names=json.dumps(names))
 
 
 @application.route('/login', methods=('get', 'post'))
