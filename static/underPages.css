@@ -1,7 +1,7 @@
 #big_button{
     font-size: 18px;
     font-weight: bold;
-    background: #9fa9a3;
+    background: #136f63;
     color: rgb(255, 255, 255);
     border: 0;
     text-decoration: none;
@@ -12,6 +12,16 @@
     outline: none;
     text-align: center;
     padding-left: 15px;
+    padding-right: 15px;
+}
+
+#column-left{
+    float: left;
+    width: 33%;
+    padding: 20px;
+}
+.left{
+
 }
 
 .h1 {

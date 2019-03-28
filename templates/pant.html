@@ -152,49 +152,37 @@
   </div>
 </div>
 
-<br/>
-<section class="container">
-    <div id="space_maker"><h1> Pant </h1>
+<div id="space_maker">
+
+
+  <div style="text-align: center;">
+    <div class="row">
+      <div style="float: left; width: 25%; padding: 15px;">
         <br/>
-        <div style="text-align: center;">
-            <div>
-                <h5> PANT!! </h5>
-
-                <form method="post" id="pos">
-                    <input type="radio" name="loc" value="hei" onclick="getCurrPosition()"> Huk av for å bruke din
-                    posisjon!<br>
-                </form>
-
-                <br/>
-                <button type="submit" id="big_button"
-                        onclick="findNearestMarker()">
-                    Finn din nærmeste pantestasjon!
-                </button>
-
-
-            </div>
-        </div>
-
-
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+         <br/>
         <br/>
 
+        <form method="post" id="pos">
+          <input type="radio" name="loc" value="hei" onclick="getCurrPosition()"> Huk av for å bruke din posisjon!<br>
+        </form>
+        <br/>
+        <button type="submit" id="big_button"
+                onclick="findNearestMarker()">
+          Finn din nærmeste panteautomat!
+        </button>
+      </div>
+      <div class="column">
+        <br/>
         <div id="map"></div>
-        <br/>
-
+      </div>
     </div>
-</section>
-
-<!--Footer-->
-<footer class="footer">
-    <div class="footer">
-        <div>
-            <br><h6>Takk til fretex, Trondheim kommune og infinitum for data</h6>
-            <br><h5>Laget med kjærlighet av:</h5><br>
-            <h6>Kristin Raaen, Nora S. Brask og Helene S. Molberg</h6>
-        </div>
-    </div>
-</footer>
-</body>
+  </div>
+  <br/>
+</div>
 
 <!--<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>-->
 <script type="text/javaScript">
@@ -352,7 +340,7 @@
     nearestPopup.popupOpen = true
     var nearestMarker = L.marker(nearestLatLng).bindPopup(nearestPopup).addTo(map);
 
-    alert("Du finner din nærmeste miljøstasjon ved " + nearest_text)
+    alert("Du finner din nærmeste panteautomat ved " + nearest_text)
 
     //var polyline = L.polyline([nearestLatLng, origin], {color: 'red'}).addTo(map);
 
@@ -362,9 +350,191 @@
 
 
   }
-
-
 </script>
+<!-- Input og utput av kommentarer-->
+<script>
+    var pant_stasjoner = createStationNameList()
+    var pant_statuser = createStatusList()
+    var pant_kommentarer = createCommentList()
+
+    function createStationNameList() {
+        var pant_station_names = JSON.parse({{pant_station_names|tojson}});
+        var pant_stasjoner = []
+        for (var i = 0; i < pant_station_names.length; i++) {
+            var n = pant_station_names[i]
+            pant_stasjoner.push([n])
+        }
+        return pant_stasjoner
+    }
+
+    function createStatusList() {
+        var pant_statuses = JSON.parse({{pant_statuses|tojson}});
+        var pant_statuser = []
+        for (var i = 0; i < pant_statuses.length; i++) {
+            var n = pant_statuses[i]
+            pant_statuser.push([n])
+        }
+        return pant_statuser
+    }
+
+    function createCommentList() {
+        var pant_feedback_comments = JSON.parse({{ pant_feedback_comments | tojson }});
+        var pant_kommentarer = []
+        for (var i = 0; i < pant_feedback_comments.length; i++) {
+            var n = pant_feedback_comments[i]
+            pant_kommentarer.push([n])
+        }
+        return pant_kommentarer
+    }
+    console.log(createCommentList());
+    console.log(createStatusList());
+    console.log(createStationNameList());
+</script>
+
+<div class="row row-no-gutters">
+    <!-- Legger til kontaktskjema-->
+    <div class="col-md-6" style="padding-left: 100px ">
+        <form id="contact-form" method="post" action="" role="form">
+            <div class="messages"></div>
+            <div class="controls">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="pant_station_name">Navn på butikk *</label>
+                            <input id="pant_station_name" type="text" name="pant_station_name" class="form-control"
+                                   autocomplete="off"
+                                   placeholder="Navn på butikk"
+                                   required="required"
+                                   data-error="Vennligst skriv inn navn på butikk">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="pant_status">Hva vil du rapportere *</label>
+                            <select id="pant_status" name="pant_status" class="form-control" required="required"
+                                    data-error="Vennligst spesifiser hva du vil melde fra om">
+                                <option value=""></option>
+                                <option value="Full automat">Automaten er full</option>
+                                <option value="Feil på Automat">Det er en feil på automaten</option>
+                                <option value="Feil i kart">Det er en feil i kartet</option>
+                                <option value="Annet">Annet</option>
+                            </select>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="pant_comment">Melding</label>
+                            <textarea id="pant_comment" name="pant_comment" class="form-control"
+                                      placeholder="Skriv inn din melding" rows="4"
+                                      data-error="Please, leave us a message."></textarea>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <input type="submit" class="btn btn-success btn-send" value="Send inn"
+                               style="background-color: #777777;border-color: #777777">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <p class="text-muted">
+                            <strong>*</strong> Disse feltene må fylles inn
+                            <a href="https://bootstrapious.com/p/how-to-build-a-working-bootstrap-contact-form"
+                               target="_blank"></a></p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Legger til kommentarer-->
+    <div class="col-md-6" style=" padding-left: 70px">
+        <div class="col-md-12">
+            <caption>Kommentarer</caption>
+            <div id="table-scroll" style="border: 0.5px #777777 solid; box-sizing: border-box">
+                <table id="myTabel" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th>Automat</th>
+                        <th>Status</th>
+                        <th>Kommentarer</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableBody_pant">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Script for å legge inn kommentarene-->
+<script>
+    cols = 3;
+    var tableRef = document.getElementById("tableBody_pant");
+
+    for (var i = 0; i < pant_stasjoner.length; i += 1) {
+        var row = tableRef.insertRow(i);
+        for (var j = 0; j < cols; j += 1) {
+            var cell = row.insertCell(j);
+            if (j === 0) { // First td
+                var text = document.createTextNode(pant_stasjoner[i]);
+                cell.appendChild(text);
+            }
+            if (j === 1) { // Second td
+                var text = document.createTextNode(pant_statuser[i]);
+                cell.appendChild(text);
+            }
+            if (j === 2) { // Second td
+                var text = document.createTextNode(pant_kommentarer[i]);
+                cell.appendChild(text);
+            }
+        }
+    }
+</script>
+<!-- Styling for feedback og kommentarboks-->
+<style>
+    table, th, td {
+        font: 400 15px/1.8 "Lato", sans-serif;
+        border: 0.5px solid #777777;
+        border-collapse: collapse;
+    }
+
+    th {
+        font: 600 15px/1.8 "Lato", sans-serif;
+    }
+
+    th, td {
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    #table-scroll {
+        height: 250px;
+        overflow: auto;
+        margin-top: 20px;
+    }
+</style>
+
+<!--Footer-->
+<footer class="footer">
+    <div class="footer">
+        <div>
+            <br><h6>Takk til Fretex, Trondheim kommune og infinitum for data</h6>
+            <br><h5>Laget med kjærlighet av:</h5><br>
+            <h6>Kristin Raaen, Nora S. Brask og Helene S. Molberg</h6>
+        </div>
+    </div>
+</footer>
+</body>
 
 
 </body>
