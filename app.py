@@ -185,7 +185,7 @@ def pant():
 def recycle():
     if request.method == 'POST':
         form = request.form
-        recycle_feedback = PantFeedback(recycle_stationname=form['recycle_station_name'], recycle_status=form['recycle_status'],
+        recycle_feedback = RecycleFeedback(recycle_stationname=form['recycle_station_name'], recycle_status=form['recycle_status'],
                                         recycle_comment=form['recycle_comment'])
         db.session.add(recycle_feedback)
         db.session.commit()
