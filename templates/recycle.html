@@ -340,10 +340,180 @@
 
 
   }
-
-
 </script>
 
+<!-- Input og utput av kommentarer-->
+<script>
+    var recycle_stasjoner = createStationNameList()
+    var recycle_statuser = createStatusList()
+    var recycle_kommentarer = createCommentList()
+
+    function createStationNameList() {
+        var recycle_station_names = JSON.parse({{recycle_station_names|tojson}});
+        var recycle_stasjoner = []
+        for (var i = 0; i < recycle_station_names.length; i++) {
+            var n = recycle_station_names[i]
+            recycle_stasjoner.push([n])
+        }
+        return recycle_stasjoner
+    }
+
+    function createStatusList() {
+        var recycle_statuses = JSON.parse({{recycle_statuses|tojson}});
+        var recycle_statuser = []
+        for (var i = 0; i < recycle.statuses.length; i++) {
+            var n = recycle_statuses[i]
+            recycle_statuser.push([n])
+        }
+        return recycle_statuser
+    }
+
+    function createCommentList() {
+        var recycle_feedback_comments = JSON.parse({{ recycle_feedback_comments | tojson }});
+        var recycle_kommentarer = []
+        for (var i = 0; i < recycle_feedback_comments.length; i++) {
+            var n = recycle_feedback_comments[i]
+            recycle_kommentarer.push([n])
+        }
+        return pant_kommentarer
+    }
+    console.log(createCommentList());
+    console.log(createStatusList());
+    console.log(createStationNameList());
+</script>
+
+<div class="row row-no-gutters">
+    <!-- Legger til kontaktskjema-->
+    <div class="col-md-6" style="padding-left: 100px ">
+        <form id="contact-form" method="post" action="" role="form">
+            <div class="messages"></div>
+            <div class="controls">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="recycle_station_name">Navn på miljøstasjon *</label>
+                            <input id="recycle_station_name" type="text" name="recycle_station_name" class="form-control"
+                                   autocomplete="off"
+                                   placeholder="Navn på miljøstasjon"
+                                   required="required"
+                                   data-error="Vennligst skriv inn navn på miljøstasjon">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="recycle_status">Hva vil du rapportere *</label>
+                            <select id="recycle_status" name="recycle_status" class="form-control" required="required"
+                                    data-error="Vennligst spesifiser hva du vil melde fra om">
+                                <option value=""></option>
+                                <option value="Full stasjon">Stasjonen er full</option>
+                                <option value="Feil på stasjon">Det er en feil på stasjonen</option>
+                                <option value="Feil i kart">Det er en feil i kartet</option>
+                                <option value="Annet">Annet</option>
+                            </select>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="recycle_comment">Melding</label>
+                            <textarea id="recycle_comment" name="recycle_comment" class="form-control"
+                                      placeholder="Skriv inn din melding" rows="4"
+                                      data-error="Please, leave us a message."></textarea>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <input type="submit" class="btn btn-success btn-send" value="Send inn"
+                               style="background-color: #777777;border-color: #777777">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <p class="text-muted">
+                            <strong>*</strong> Disse feltene må fylles inn
+                            <a href="https://bootstrapious.com/p/how-to-build-a-working-bootstrap-contact-form"
+                               target="_blank"></a></p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Legger til kommentarer-->
+    <div class="col-md-6" style=" padding-left: 70px">
+        <div class="col-md-12">
+            <caption>Kommentarer</caption>
+            <div id="table-scroll" style="border: 0.5px #777777 solid; box-sizing: border-box">
+                <table id="myTabel" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th>Stasjon</th>
+                        <th>Status</th>
+                        <th>Kommentarer</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableBody_recycle">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Script for å legge inn kommentarene-->
+<script>
+    cols = 3;
+    var tableRef = document.getElementById("tableBody_recycle");
+
+    for (var i = 0; i < recycle_stasjoner.length; i += 1) {
+        var row = tableRef.insertRow(i);
+        for (var j = 0; j < cols; j += 1) {
+            var cell = row.insertCell(j);
+            if (j === 0) { // First td
+                var text = document.createTextNode(recycle_stasjoner[i]);
+                cell.appendChild(text);
+            }
+            if (j === 1) { // Second td
+                var text = document.createTextNode(recycle_statuser[i]);
+                cell.appendChild(text);
+            }
+            if (j === 2) { // Second td
+                var text = document.createTextNode(recycle_kommentarer[i]);
+                cell.appendChild(text);
+            }
+        }
+    }
+</script>
+<!-- Styling for feedback og kommentarboks-->
+<style>
+    table, th, td {
+        font: 400 15px/1.8 "Lato", sans-serif;
+        border: 0.5px solid #777777;
+        border-collapse: collapse;
+    }
+
+    th {
+        font: 600 15px/1.8 "Lato", sans-serif;
+    }
+
+    th, td {
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    #table-scroll {
+        height: 250px;
+        overflow: auto;
+        margin-top: 20px;
+    }
+</style>
 
 </body>
 </html>

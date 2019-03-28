@@ -33,8 +33,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.js"
+            charset="utf-8"></script>
 
 
     <link rel="stylesheet" type="text/css" href="../static/underPages.css">
@@ -147,38 +149,50 @@
 </div>
 <br/>
 
-<div id="space_maker"><h1> Finn din nærmeste innsamlingsboks eller Fretex-butikk </h1>
-    <br/>
-    <div style="text-align: center;">
-        <div>
+<div style="text-align: center;">
+    <div class="row">
+        <div style="float: left; width: 25%; padding: 50px;">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
             <form method="post" id="pos">
                 <input type="radio" name="loc" value="hei" onclick="getCurrPosition()"> Huk av for å bruke din posisjon!<br>
             </form>
-            <button type="submit" id="big_button" style="background-color: #777777"
+            <br/>
+            <button type="submit" id="big_button"
                     onclick="findNearestMarker()">
-                Finn din nærmeste miljøstasjon
+                Nærmeste Fretexboks:
             </button>
         </div>
-    </div>
-    <br/>
-    <div id="map"></div>
-    <div>
-        <p>De
-            <mark class="yellow"> gule</mark>
-            markørene viser Fretex sine butikker, og de
-            <mark class="blue">blå</mark>
-            viser innsamlingsbokser
-        </p>
-    </div>
-    <br/>
-
-    <div>
-        <p>Har du lyst til å lese mer om hvor klærne din havner?</p>
-        <a href="https://www.fretex.no/">
-            <p>Sjekk ut Fretex sine hjemmesider</p>
-        </a>
+        <div class="column">
+            <br/>
+            <div id="map"></div>
+            <div>
+                <p>De
+                    <mark class="yellow"> gule</mark>
+                    markørene viser Fretex sine butikker, og de
+                    <mark class="blue">blå</mark>
+                    viser innsamlingsbokser
+                </p>
+            </div>
+        </div>
     </div>
 </div>
+<br/>
+
+<div style="padding-left: 450px; align-items: center">
+    <p>Har du lyst til å lese mer om hvor klærne din havner?</p>
+    <a href="https://www.fretex.no/">
+        <p style="padding-left: 60px">Sjekk ut Fretex sine hjemmesider</p>
+    </a>
+</div>
+</div>
+</body>
 
 
 <script type="text/javaScript">
@@ -515,6 +529,6 @@
         margin-top: 20px;
     }
 </style>
-</div>
+
 </body>
 </html>
