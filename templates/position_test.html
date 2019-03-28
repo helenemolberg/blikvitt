@@ -191,7 +191,7 @@
         popupAnchor: [1, -34],
         shadowSize: [41, 41]
     });
-
+/*
     var yellowIcon = new L.Icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -201,7 +201,7 @@
         shadowSize: [41, 41]
     });
 
-
+*/
     var globalMarker = [];
     var ORIGIN = [63.4264656812, 10.392372476357]
 
@@ -258,14 +258,14 @@
         accessToken: 'pk.eyJ1Ijoibm9yYWJyYXNrIiwiYSI6ImNqcmFqZmpiZTAweGw0M3VwZWNrbDBmYTMifQ.AOxh5UWfWvR5c_my3yPTBQ'
     }).addTo(map);
 
-
+/*
     nardo = new L.marker([63.409408, 10.4188753], {icon: yellowIcon}).bindPopup("<b> Fretex Nardo</b>" +
         " Nardovegen 10, 7032 Trondheim<b>").addTo(map);
     fjordgata = new L.marker([63.434902, 10.39895], {icon: yellowIcon}).bindPopup("<b> Fretex Fjordgata</b> " +
         "Fjordgata 40, 7010 Trondheim <b>").addTo(map);
     rosenborg = new L.marker([63.4338341, 10.4160679], {icon: yellowIcon}).bindPopup("<b> Fretex Bruktbutikk</b> " +
         "Rosenborg gate 9B, 7043 Trondheim <b>").addTo(map);
-
+*/
     function getCurrPosition() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (pos) {
