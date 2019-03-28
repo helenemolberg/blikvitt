@@ -405,87 +405,93 @@
 </script>
 
 <div class="row row-no-gutters">
-    <!-- Legger til kontaktskjema-->
-    <div class="col-md-6" style="padding-left: 100px ">
-        <form id="contact-form" method="post" action="" role="form">
-            <div class="messages"></div>
-            <div class="controls">
-                <div class="row">
-                    <div class="col-md-10">
-                        <div class="form-group">
-                            <label for="recycle_station_name">Navn på miljøstasjon *</label>
-                            <input id="recycle_station_name" type="text" name="recycle_station_name" class="form-control"
-                                   autocomplete="off"
-                                   placeholder="Navn på miljøstasjon"
-                                   required="required"
-                                   data-error="Vennligst skriv inn navn på miljøstasjon">
-                            <div class="help-block with-errors"></div>
+    {% block feed %}
+        {% if session['logged_in'] %}
+            <!-- Legger til kontaktskjema-->
+            <div class="col-md-6" style="padding-left: 100px ">
+                <form id="contact-form" method="post" action="" role="form">
+                    <div class="messages"></div>
+                    <div class="controls">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="recycle_station_name">Navn på miljøstasjon *</label>
+                                    <input id="recycle_station_name" type="text" name="recycle_station_name"
+                                           class="form-control"
+                                           autocomplete="off"
+                                           placeholder="Navn på miljøstasjon"
+                                           required="required"
+                                           data-error="Vennligst skriv inn navn på miljøstasjon">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="recycle_status">Hva vil du rapportere *</label>
+                                    <select id="recycle_status" name="recycle_status" class="form-control"
+                                            required="required"
+                                            data-error="Vennligst spesifiser hva du vil melde fra om">
+                                        <option value=""></option>
+                                        <option value="Full stasjon">Stasjonen er full</option>
+                                        <option value="Feil på stasjon">Det er en feil på stasjonen</option>
+                                        <option value="Feil i kart">Det er en feil i kartet</option>
+                                        <option value="Annet">Annet</option>
+                                    </select>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="recycle_comment">Melding</label>
+                                    <textarea id="recycle_comment" name="recycle_comment" class="form-control"
+                                              placeholder="Skriv inn din melding" rows="4"
+                                              data-error="Please, leave us a message."></textarea>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input type="submit" class="btn btn-success btn-send" value="Send inn"
+                                       style="background-color: #777777;border-color: #777777">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <p class="text-muted">
+                                    <strong>*</strong> Disse feltene må fylles inn
+                                    <a href="https://bootstrapious.com/p/how-to-build-a-working-bootstrap-contact-form"
+                                       target="_blank"></a></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-10">
-                        <div class="form-group">
-                            <label for="recycle_status">Hva vil du rapportere *</label>
-                            <select id="recycle_status" name="recycle_status" class="form-control" required="required"
-                                    data-error="Vennligst spesifiser hva du vil melde fra om">
-                                <option value=""></option>
-                                <option value="Full stasjon">Stasjonen er full</option>
-                                <option value="Feil på stasjon">Det er en feil på stasjonen</option>
-                                <option value="Feil i kart">Det er en feil i kartet</option>
-                                <option value="Annet">Annet</option>
-                            </select>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-10">
-                        <div class="form-group">
-                            <label for="recycle_comment">Melding</label>
-                            <textarea id="recycle_comment" name="recycle_comment" class="form-control"
-                                      placeholder="Skriv inn din melding" rows="4"
-                                      data-error="Please, leave us a message."></textarea>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-10">
-                        <input type="submit" class="btn btn-success btn-send" value="Send inn"
-                               style="background-color: #777777;border-color: #777777">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-10">
-                        <p class="text-muted">
-                            <strong>*</strong> Disse feltene må fylles inn
-                            <a href="https://bootstrapious.com/p/how-to-build-a-working-bootstrap-contact-form"
-                               target="_blank"></a></p>
+                </form>
+            </div>
+            <!-- Legger til kommentarer-->
+            <div class="col-md-6" style=" padding-left: 70px">
+                <div class="col-md-12">
+                    <caption>Kommentarer</caption>
+                    <div id="table-scroll" style="border: 0.5px #777777 solid; box-sizing: border-box">
+                        <table id="myTabel" style="width: 100%">
+                            <thead>
+                            <tr>
+                                <th>Stasjon</th>
+                                <th>Status</th>
+                                <th>Kommentarer</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tableBody_recycle">
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
-    <!-- Legger til kommentarer-->
-    <div class="col-md-6" style=" padding-left: 70px">
-        <div class="col-md-12">
-            <caption>Kommentarer</caption>
-            <div id="table-scroll" style="border: 0.5px #777777 solid; box-sizing: border-box">
-                <table id="myTabel" style="width: 100%">
-                    <thead>
-                    <tr>
-                        <th>Stasjon</th>
-                        <th>Status</th>
-                        <th>Kommentarer</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tableBody_recycle">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+        {% endif %}
+    {% endblock %}
 </div>
 <!-- Script for å legge inn kommentarene-->
 <script>
