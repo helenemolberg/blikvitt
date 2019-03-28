@@ -5,4 +5,4 @@ sqlalchemy
 flask-sqlalchemy
 flask-migrate
 flask-script
-flask-login
+Flask-Session

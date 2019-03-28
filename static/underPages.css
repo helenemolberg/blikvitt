@@ -12,6 +12,16 @@
     outline: none;
     text-align: center;
     padding-left: 15px;
+    padding-right: 15px;
+}
+
+#column-left{
+    float: left;
+    width: 33%;
+    padding: 20px;
+}
+.left{
+
 }
 
 .h1 {

@@ -1,141 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Pant</title>
-    <!--Bootstrap-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <title>A Leaflet map!</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+  <meta charset="UTF-8">
+  <title>Pant</title>
+  <!--Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../static/underPages.css">
+
+  <title>A Leaflet map!</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
         integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
         crossorigin=""/>
-    <link rel="stylesheet" type="text/css" href="../static/underPages.css">
-    <link rel="stylesheet" href="/w3css/4/w3.css">
-<style>
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+          integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+          crossorigin=""></script>
+
+  <!--Shortest path - LINK -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"/>
+
+
+  <title>Leaflet Locate</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
+  <script src='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.css' rel='stylesheet'/>
+
+
+  <style>
     body, html {
-  height: 100%;
-  margin: 0;
-  font: 400 15px/1.8 "Lato", sans-serif;
-  color: #777;
+      height: 100%;
+      margin: 0;
+      font: 400 15px/1.8 "Lato", sans-serif;
+      color: #777;
+    }
+
+    .bgimg-1 {
+      position: relative;
+      opacity: 0.65;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .bgimg-1 {
+      background-image: url("/static/images/plastic_in_ocean.jpg");
+      height: 100%;
+    }
+
+    .caption {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      text-align: center;
+      color: #000;
+    }
+
+    .caption span.border {
+      background-color: #111;
+      color: #fff;
+      padding: 18px;
+      font-size: 25px;
+      letter-spacing: 10px;
+    }
+
+    .caption span.border3 {
+    background-color: #111;
+    color: #fff;
+    padding: 14px;
+    font-size: 16px;
+    letter-spacing: 3px;
+    margin-top: 25px;
 }
-.bgimg-1, .bgimg-2, .bgimg-3 {
-  position: relative;
-  opacity: 0.65;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+    .nav-link {
+      font-size: 18px;
+      font-family: "Bell MT";
+    }
+    .footer {
+        width: 100%;
+        background-color: #111111;
+        opacity: 0.65;
+        color: white;
+        text-align: center;
+        height: 200px;
+    }
+      .container{
+    margin-top: 100px;
+    min-height: 100%;
+    padding-bottom: 200px;
 }
-.bgimg-1 {
-  background-image: url("/static/images/plastic_in_ocean.jpg");
-  height: 100%;
-}
-.caption {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 100%;
-  text-align: center;
-  color: #000;
-}
-.caption span.border {
-  background-color: #111;
-  color: #fff;
-  padding: 18px;
-  font-size: 25px;
-  letter-spacing: 10px;
-}
-    .nav-link{
-    font-size: 18px;
-    font-family: "Bell MT";
-}
-</style>
+  </style>
 
 </head>
 
 <body>
+
+<!-- Plug inn for å finne lokasjon-->
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.mapbox.css'
+      rel='stylesheet'/>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/css/font-awesome.min.css'
+      rel='stylesheet'/>
+
+
+<title>Shortest path</title>
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+
 <div class="navBar">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light justify-content-center">
-        <a class="navbar-brand" href="/">MS</a>
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Om oss</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/pant">Pant</a>
-          </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/fretex">Fretex</a>
-          </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/recycle">Miljøstasjoner</a>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Logg inn</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/registeruser">Registrer</a>
-            </li>
-        </ul>
-  
-        <!--<span class="navbar-text white-text">
-          Navbar text with an inline element
-        </span>-->
-</nav>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light justify-content-center">
+    <a class="navbar-brand" href="/">BK</a>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/pant">Pant</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/fretex">Fretex</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/recycle">Miljøstasjoner</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      {% block body %}
+            {% if session['logged_in'] %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logg ut</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Logg inn</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/registeruser">Registrer</a>
+                </li>
+                {% endif %}
+            {% endblock %}
+    </ul>
+
+  </nav>
 </div>
 <div class="bgimg-1">
   <div class="caption">
-    <span class="border">HUSK Å PANT</span><br>
-    <span class="border">Les mer</span>
+    <span class="border">PANT ALT. DET HAR EN VERDI!</span><br>
+      <br><br><br><br><span class="border3">Finn ut hvor din nærmeste panteautomat ligger.
+      <br><br> Scroll ned for å se kartet</span>
   </div>
 </div>
 
+<div id="space_maker">
+
+
+  <div style="text-align: center;">
+    <div class="row">
+      <div style="float: left; width: 25%; padding: 15px;">
         <br/>
-        <div id="space_maker"><h1> Pant  </h1>
-            <br/>
-             <div style="text-align: center;">
-                 <div >
-                     <h5> Hva ønsker du å resirkulere? </h5>
-                     <form action="/action_page.php" >
-                        <input type="checkbox" name="recproduct" value="plastic"> Plast<br>
-                        <input type="checkbox" name="recproduct" value="metal" checked> Metall og glass<br>
-                        <input type="checkbox" name="recproduct" value="paper" checked> Papp og papir<br>
-                        <input type="checkbox" name="recproduct" value="electric" checked> Elektrisk avfall <br>
-                     </form>
-                     <a href="https://no.wikipedia.org/wiki/Resirkulering">
-                         <button type="submit" id = "big_button"> Søk </button>
-                     </a>
-                 </div>
-             </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+         <br/>
+        <br/>
 
-            <br/>
+        <form method="post" id="pos">
+          <input type="radio" name="loc" value="hei" onclick="getCurrPosition()"> Huk av for å bruke din posisjon!<br>
+        </form>
+        <br/>
+        <button type="submit" id="big_button"
+                onclick="findNearestMarker()">
+          Finn din nærmeste panteautomat!
+        </button>
+      </div>
+      <div class="column">
+        <br/>
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+  <br/>
+</div>
 
-            <div id="map"></div>
-            <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
-            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
-            crossorigin="">
-            </script>
-            <script>
-               var map = L.map('map').setView([63.430827, 10.410906], 13);
-               L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                    maxZoom: 18,
-                    id: 'mapbox.streets',
-                    accessToken: 'pk.eyJ1Ijoibm9yYWJyYXNrIiwiYSI6ImNqcmFqZmpiZTAweGw0M3VwZWNrbDBmYTMifQ.AOxh5UWfWvR5c_my3yPTBQ'
-                }).addTo(map);
 
-               filtered = [(63.42983445294848, 10.368214199539029), (63.439024006030465, 10.42835219928823)]
-
-               marker = new L.marker([63.42983445294848, 10.368214199539029]).addTo(map);
-
-               for (var i = 0; i < filtered.length; i++) {
-                    marker = new L.marker([filtered[i][1],filtered[i][2]]).addTo(map);
-                }
-            </script>
+<!--Footer-->
+<footer class="footer">
+    <div class="footer">
+        <div>
+            <br><h6>Takk til fretex, Trondheim kommune og infinitum for data</h6>
+            <br><h5>Laget med kjærlighet av:</h5><br>
+            <h6>Kristin Raaen, Nora S. Brask og Helene S. Molberg</h6>
         </div>
+    </div>
+</footer>
+</body>
+
+<!--<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>-->
+<script type="text/javaScript">
+
+  var latlongs = createCoordList()
+  var addressList = createAddressList()
+  var markers = []
+  var markersLatlng = []
+
+  var redIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+  var marker = L.marker();
+  // //[63,10]
+  var globalMarker = [];
+
+
+  var ORIGIN = [63.4264656812, 10.392372476357]
+
+  //HENTER FRA DATABASEN
+  function createCoordList() {
+    //LATITUDE
+    var latitude = JSON.parse({{plats | tojson}});
+    var lats = []
+    for (var i = 0; i < 68; i++) {
+      var l = latitude[i]
+      var lat = parseFloat(l)
+      lats.push(lat)
+    }
+
+    //LONGITUDE
+    var longitude = JSON.parse({{plongs | tojson}});
+    var longs = []
+    for (var i = 0; i < 68; i++) {
+      var l = longitude[i]
+      var long = parseFloat(l)
+      longs.push(long)
+    }
+
+    //Opretter liste
+    latlongs = []
+    for (var i = 0; i < 68; i++) {
+      latlongs.push([lats[i], longs[i]])
+    }
+    return latlongs
+  }
+
+
+  //Lager adresseliste
+  function createAddressList() {
+    var names = JSON.parse({{pnames | tojson}});
+    var addresses = []
+    for (var i = 0; i < 68; i++) {
+      var n = names[i]
+      addresses.push([n])
+    }
+    return addresses
+  }
+
+
+  var map = L.map('map').setView([63.4264656812, 10.392372476357], 13);
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1Ijoibm9yYWJyYXNrIiwiYSI6ImNqcmFqZmpiZTAweGw0M3VwZWNrbDBmYTMifQ.AOxh5UWfWvR5c_my3yPTBQ'
+  }).addTo(map);
+
+  function getCurrPosition() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        //You have your location here
+        console.log("Latitude: " + pos.coords.latitude +
+          " Longitude: " + pos.coords.longitude);
+        you = L.marker([pos.coords.latitude, pos.coords.longitude], {icon: redIcon});
+        you.addTo(map);
+        map.setView([pos.coords.latitude, pos.coords.longitude], 13, {animation: true});
+        globalMarker = [pos.coords.latitude, pos.coords.longitude];
+        console.log('hallo')
+        console.log(globalMarker)
+
+      });
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+
+  }
+
+
+  function createLayer(coordList) {
+    for (var i = 0; i < coordList.length; i++) {
+      var tmpPoint = L.latLng(coordList[i])
+      markersLatlng.push(tmpPoint)
+      var tmpMarker = L.marker(coordList[i])
+      myPopup = L.popup().setContent("<strong>" + addressList[i] + "</strong>");
+      tmpMarker.bindPopup(myPopup);
+      markers.push(tmpMarker)
+    }
+    var markerLayerGroup = L.layerGroup(markers);
+    markerLayerGroup.addTo(map)
+    return markerLayerGroup
+  }
+
+  coordLayer = createLayer(latlongs)
+
+  //console.log(coordLayer)
+
+
+  function centerZoom(map, marker) {
+    map.setView(marker.getLatLng(), 16);
+  }
+
+
+  function findNearestMarker() {
+    var minDist = 1000000,
+      nearestLatLng = [63.4264656812, 10.392372476357],
+      nearest_text = '*None*',
+      markerDist = 0,
+      len = markers.length;
+
+
+    console.log(markersLatlng.length)
+    console.log(addressList.length)
+    ORIGIN = globalMarker;
+    console.log(globalMarker)
+    for (var i = 0; i < markersLatlng.length - 1; i += 1) {
+      markerDist = markersLatlng[i].distanceTo(ORIGIN)
+      if (markerDist < minDist) {
+        minDist = markerDist;
+        nearest_text = addressList[i];
+        nearestLatLng = markersLatlng[i]
+      }
+    }
+
+    console.log('FERDIG! ' + nearestLatLng)
+    console.log('her er coordlayer' + coordLayer)
+
+    L.Routing.control({
+      waypoints: [
+        L.latLng(ORIGIN),
+        L.latLng(nearestLatLng)
+      ],
+    }).addTo(map);
+
+    var originPopup = L.popup().setContent("<p>Du er her!</p> <strong>").openPopup();
+    originPopup.popupOpen = true
+    var originMarker = L.marker(ORIGIN, {icon: redIcon}).bindPopup(originPopup).addTo(map);
+
+    var nearestPopup = L.popup().setContent(" <strong>" + nearest_text + "</strong>").openPopup();
+    nearestPopup.popupOpen = true
+    var nearestMarker = L.marker(nearestLatLng).bindPopup(nearestPopup).addTo(map);
+
+    alert("Du finner din nærmeste panteautomat ved " + nearest_text)
+
+    //var polyline = L.polyline([nearestLatLng, origin], {color: 'red'}).addTo(map);
+
+    centerZoom(map, nearestMarker)
+
+    map.removeLayer(coordLayer)
+
+
+  }
+
+
+</script>
+
+
 </body>
 </html>
