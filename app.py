@@ -32,7 +32,7 @@ manager.add_command('db', MigrateCommand)
 
 class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    station_name = db.Column(db.String(50), nullable=False)
+    stationname = db.Column(db.String(50), nullable=False)
     status = db.Column(db.String(50), nullable=False)
     comment = db.Column(db.String(200), nullable=True)
 
@@ -87,7 +87,7 @@ def fretex():
 
     if request.method == 'POST':
         form = request.form
-        feedback = Feedback(stationName=form['station_name'], status=form['status'], comment=form['comment'])
+        feedback = Feedback(stationname=form['station_name'], status=form['status'], comment=form['comment'])
         db.session.add(feedback)
         db.session.commit()
 
