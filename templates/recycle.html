@@ -383,7 +383,7 @@
     function createStatusList() {
         var recycle_statuses = JSON.parse({{recycle_statuses|tojson}});
         var recycle_statuser = []
-        for (var i = 0; i < recycle.statuses.length; i++) {
+        for (var i = 0; i < recycle_statuses.length; i++) {
             var n = recycle_statuses[i]
             recycle_statuser.push([n])
         }
